@@ -99,26 +99,29 @@
         
         /* Urgency Banner */
         .urgency-banner {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: var(--urgent);
-            color: white;
-            text-align: center;
-            padding: 8px;
-            font-size: 12px;
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            z-index: 1001;
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.9; }
-        }
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: rgba(212, 175, 55, 0.08);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        color: var(--gold);
+        text-align: center;
+        padding: 8px;
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        z-index: 1001;
+        border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+        font-family: 'Inter', sans-serif;
+    }
+
+    header {
+        top: 36px !important;
+    }
+</style>
         
         /* Header - Updated for banner */
         header { 
