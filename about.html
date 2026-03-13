@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn about Faraz Nadeem, the visionary behind Farazé. Discover the passion for crafting the most long-lasting, premium luxury perfumes in Pakistan.">
+    <meta name="keywords" content="Faraz Nadeem, Farazé founder, luxury perfume brand, long lasting perfume, contact Faraze">
+    <title>Farazé | About the Founder & Contact</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root { --bg-color: #050505; --bg-pure: #000000; --text-main: #FFFFFF; --text-muted: #999999; --border-lux: #2A2A2A; --transition-slow: 0.8s; --transition-med: 0.4s; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background-color: var(--bg-color); color: var(--text-main); font-family: 'Inter', sans-serif; overflow-x: hidden; scroll-behavior: smooth; }
+        body::before { content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.04"/%3E%3C/svg%3E'); z-index: -2; pointer-events: none; }
+        body::after { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at center, #111 0%, #050505 70%); z-index: -1; pointer-events: none; }
+        h1, h2, h3, .logo, .section-title, .footer-logo { font-family: 'Cinzel', serif; }
+
+        header { position: fixed; top: 0; width: 100%; padding: 25px 5%; display: flex; justify-content: space-between; align-items: center; z-index: 1000; background: rgba(5, 5, 5, 0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-lux); }
+        .logo { font-size: 26px; font-weight: 700; letter-spacing: 5px; text-transform: uppercase; color: var(--text-main); text-decoration: none; }
+        .social-links { display: flex; gap: 20px; flex-wrap: wrap; justify-content: flex-end; }
+        .social-btn { color: var(--text-muted); text-decoration: none; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; transition: color 0.3s; position: relative; }
+        .social-btn::after { content: ''; position: absolute; width: 0; height: 1px; bottom: -5px; left: 0; background-color: var(--text-main); transition: width 0.3s; }
+        .social-btn:hover { color: var(--text-main); }
+        .social-btn:hover::after { width: 100%; }
+
+        .about-section { padding: 180px 5% 100px 5%; min-height: 80vh; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--border-lux); }
+        .about-container { display: flex; align-items: center; max-width: 1100px; width: 100%; gap: 80px; opacity: 0; transform: translateY(40px); transition: all 0.8s; }
+        .about-container.visible { opacity: 1; transform: translateY(0); }
+        .founder-img { flex: 1; position: relative; border: 1px solid var(--border-lux); overflow: hidden; }
+        .founder-img img { width: 100%; display: block; filter: grayscale(100%); transition: filter 0.6s, transform 0.6s; }
+        .founder-img:hover img { filter: grayscale(0%); transform: scale(1.02); }
+        .about-text { flex: 1.2; }
+        .section-title { font-size: 42px; font-weight: 400; letter-spacing: 3px; margin-bottom: 15px; text-transform: uppercase; line-height: 1.2; }
+        .role-title { font-size: 13px; color: var(--text-main); text-transform: uppercase; letter-spacing: 5px; margin-bottom: 30px; border-bottom: 1px solid var(--border-lux); padding-bottom: 15px; display: inline-block; }
+        .story { font-size: 15px; line-height: 1.9; color: var(--text-muted); margin-bottom: 25px; font-weight: 300; }
+        .story strong { color: var(--text-main); font-weight: 500; }
+
+        .contact-section { padding: 100px 5%; display: flex; justify-content: center; flex-direction: column; align-items: center; }
+        .contact-header { text-align: center; margin-bottom: 60px; opacity: 0; transform: translateY(30px); transition: all 0.8s; }
+        .contact-header.visible { opacity: 1; transform: translateY(0); }
+        .contact-subtitle { font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 4px; margin-top: 10px; }
+        .contact-container { display: flex; max-width: 1000px; width: 100%; gap: 60px; opacity: 0; transform: translateY(30px); transition: all 0.8s; transition-delay: 0.2s; }
+        .contact-container.visible { opacity: 1; transform: translateY(0); }
+        .contact-info { flex: 1; background: #080808; border: 1px solid var(--border-lux); padding: 50px 40px; }
+        .info-block { margin-bottom: 40px; }
+        .info-title { font-size: 11px; text-transform: uppercase; letter-spacing: 3px; color: var(--text-main); margin-bottom: 10px; }
+        .info-detail { font-size: 14px; color: var(--text-muted); font-weight: 300; line-height: 1.6; }
+        .info-link { color: var(--text-muted); text-decoration: none; transition: 0.3s; }
+        .info-link:hover { color: var(--text-main); }
+        .contact-form { flex: 1.5; }
+        .form-group { margin-bottom: 20px; }
+        .form-group input, .form-group textarea { width: 100%; padding: 16px 20px; background: transparent; border: 1px solid var(--border-lux); color: var(--text-main); font-family: 'Inter', sans-serif; font-size: 14px; outline: none; transition: border-color 0.3s; }
+        .form-group input:focus, .form-group textarea:focus { border-color: var(--text-main); }
+        .submit-btn { background: var(--text-main); color: var(--bg-pure); border: none; padding: 16px 35px; font-family: 'Inter', sans-serif; font-weight: 600; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; font-size: 12px; transition: all 0.3s; width: 100%; }
+        .submit-btn:hover { background: var(--text-muted); color: var(--text-main); }
+
+        footer { background-color: var(--bg-pure); padding: 60px 5% 30px 5%; border-top: 1px solid var(--border-lux); text-align: center; }
+        .footer-logo { font-size: 24px; letter-spacing: 5px; margin-bottom: 15px; color: var(--text-main); text-transform: uppercase; }
+        .footer-promise { font-size: 13px; color: var(--text-muted); max-width: 450px; margin: 0 auto 30px auto; line-height: 1.8; font-weight: 300; }
+        .footer-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; margin-bottom: 30px; }
+        .copyright { font-size: 10px; color: #555; letter-spacing: 2px; text-transform: uppercase; }
+
+        @media (max-width: 900px) { .about-container, .contact-container { flex-direction: column; text-align: center; gap: 40px; } .role-title { border-bottom: none; } }
+        @media (max-width: 768px) { header { padding: 20px; flex-direction: column; gap: 15px; } .social-links { justify-content: center; } .logo { font-size: 20px; letter-spacing: 4px; } .section-title { font-size: 32px; } .founder-img img { filter: grayscale(0%); } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo">Farazé</a>
+        <div class="social-links">
+            <a href="index.html" class="social-btn">Home</a>
+            <a href="review.html" class="social-btn">Reviews</a>
+            <a href="about.html" class="social-btn">About Us</a>
+            <a href="https://instagram.com/your_username" target="_blank" class="social-btn">Instagram</a>
+            <a href="https://tiktok.com/@your_username" target="_blank" class="social-btn">TikTok</a>
+        </div>
+    </header>
+
+    <section class="about-section">
+        <div class="about-container reveal-element">
+            <div class="founder-img">
+                <img src="images/faraze.png" alt="Faraz Nadeem - CEO of Farazé">
+            </div>
+            <div class="about-text">
+                <h1 class="section-title">The Visionary</h1>
+                <div class="role-title">Faraz Nadeem — CEO & Founder</div>
+                
+                <p class="story">
+                    "A fragrance is not just a scent; it is an invisible signature that lingers in the room long after you have left. It is the purest expression of identity."
+                </p>
+                <p class="story">
+                    Founded by <strong>Faraz Nadeem</strong>, Farazé was born out of a profound passion for the art of perfumery and a relentless pursuit of perfection. Disappointed by the lack of true, long-lasting craftsmanship in modern commercial scents, Faraz set out to redefine luxury fragrance in Pakistan.
+                </p>
+                <p class="story">
+                    Every bottle under the <strong>Farazé</strong> label is a testament to this philosophy. From sourcing the rarest global ingredients to the meticulous blending process, Faraz ensures that each creation meets the uncompromising 'Farazé Standard'. This is not just perfume; this is an experience curated for those who command distinction.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section">
+        <div class="contact-header reveal-element">
+            <h2 class="section-title">Connect With Us</h2>
+            <p class="contact-subtitle">For Inquiries, Collaborations, or Consultations</p>
+        </div>
+
+        <div class="contact-container reveal-element">
+            <div class="contact-info">
+                <div class="info-block">
+                    <div class="info-title">Headquarters</div>
+                    <div class="info-detail"><br>Lahore, Pakistan</div>
+                </div>
+                <div class="info-block">
+                    <div class="info-title">Direct Contact</div>
+                    <div class="info-detail">
+                        <a href="https://wa.me/923095607170" target="_blank" class="info-link">WhatsApp: +92 309 5607170</a><br>
+                        Email: info@faraze.com
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form">
+                <form action="mailto:info@faraze.com" method="POST" enctype="text/plain">
+                    <div class="form-group"><input type="text" name="Name" placeholder="Your Name" required></div>
+                    <div class="form-group"><input type="email" name="Email" placeholder="Your Email Address" required></div>
+                    <div class="form-group"><input type="text" name="Subject" placeholder="Subject" required></div>
+                    <div class="form-group"><textarea name="Message" rows="5" placeholder="Your Message" required></textarea></div>
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-logo">Farazé</div>
+        <p class="footer-promise">Farazé is committed to creating distinct, long-lasting scent profiles with meticulous attention to detail. Every bottle represents a promise of craftsmanship.</p>
+        <div class="footer-links">
+            <a href="index.html" class="social-btn">Home</a>
+            <a href="review.html" class="social-btn">Reviews</a>
+            <a href="about.html" class="social-btn">About Us</a>
+            <a href="https://instagram.com/your_username" target="_blank" class="social-btn">Instagram</a>
+            <a href="https://tiktok.com/@your_username" target="_blank" class="social-btn">TikTok</a>
+        </div>
+        <div class="copyright">© 2026 FARAZÉ. SIGNATURE PERFUMES. ALL RIGHTS RESERVED.</div>
+    </footer>
+
+    <script>
+        const elementsToReveal = document.querySelectorAll('.reveal-element');
+        const revealObserver = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); }); }, { threshold: 0.15 });
+        elementsToReveal.forEach(el => revealObserver.observe(el));
+    </script>
+</body>
+</html>
