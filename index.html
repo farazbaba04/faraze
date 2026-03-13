@@ -47,7 +47,6 @@
             --gold: #d4af37; 
             --success: #22c55e;
             --error: #ef4444;
-            --urgent: #ff4444;
             --transition-slow: 0.8s cubic-bezier(0.16, 1, 0.3, 1); 
             --transition-med: 0.4s ease; 
         }
@@ -97,31 +96,32 @@
             font-family: 'Cinzel', serif; 
         }
         
-        /* Urgency Banner */
+        /* URGENCY BANNER - Theme Perfect */
         .urgency-banner {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        background: rgba(212, 175, 55, 0.08);
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-        color: var(--gold);
-        text-align: center;
-        padding: 8px;
-        font-size: 12px;
-        font-weight: 500;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        z-index: 1001;
-        border-bottom: 1px solid rgba(212, 175, 55, 0.3);
-        font-family: 'Inter', sans-serif;
-    }
-
-    header {
-        top: 36px !important;
-    }
-</style>
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(212, 175, 55, 0.08);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            color: var(--gold);
+            text-align: center;
+            padding: 10px;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            z-index: 1001;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            font-family: 'Inter', sans-serif;
+            animation: subtlePulse 3s infinite;
+        }
+        
+        @keyframes subtlePulse {
+            0%, 100% { opacity: 0.9; }
+            50% { opacity: 1; }
+        }
         
         /* Header - Updated for banner */
         header { 
@@ -172,7 +172,7 @@
             height: 1px; 
             bottom: -5px; 
             left: 0; 
-            background-color: var(--text-main); 
+            background-color: var(--gold); 
             transition: width 0.3s; 
         }
         
@@ -362,9 +362,9 @@
             gap: 25px;
             margin: 30px 0;
             padding: 15px 25px;
-            background: rgba(255,255,255,0.03);
+            background: rgba(212, 175, 55, 0.05);
             border-radius: 50px;
-            border: 1px solid var(--border-lux);
+            border: 1px solid rgba(212, 175, 55, 0.2);
         }
         
         .trust-badge {
@@ -395,7 +395,7 @@
             50% { opacity: 1; transform: translateY(8px); } 
         }
         
-        /* Product Sections - Desktop First */
+        /* Product Sections */
         .product-section { 
             min-height: 100vh; 
             display: flex; 
@@ -511,7 +511,7 @@
             border-radius: 2px;
         }
         
-        /* Sticky Buy Bar - Responsive */
+        /* Sticky Buy Bar */
         .sticky-buy-bar { 
             position: fixed; 
             bottom: 40px; 
@@ -570,7 +570,7 @@
             color: var(--text-main); 
         }
         
-        /* Modal - Responsive */
+        /* Modal */
         .modal { 
             display: none; 
             position: fixed; 
@@ -639,33 +639,9 @@
             margin-bottom: 25px; 
         }
         
-        .modal-price-detail {
-            margin-bottom: 20px;
-            padding: 10px 0;
-            border-bottom: 1px dashed var(--border-lux);
-        }
-        
-        .modal-original {
-            font-size: 16px;
-            color: var(--text-muted);
-            text-decoration: line-through;
-            margin-right: 10px;
-        }
-        
-        .modal-final {
-            font-size: 20px;
-            color: var(--gold);
-            font-weight: 600;
-        }
-        
-        /* Form - Responsive */
+        /* Form */
         .form-group { 
             margin-bottom: 16px; 
-        }
-        
-        .form-row { 
-            display: flex; 
-            gap: 15px; 
         }
         
         .form-group input, 
@@ -725,10 +701,6 @@
             align-items: center;
             padding: 15px 0;
             border-bottom: 1px solid var(--border-lux);
-        }
-        
-        .selector-item:last-child {
-            border-bottom: none;
         }
         
         .selector-item-info {
@@ -911,7 +883,6 @@
         
         /* ===== RESPONSIVE DESIGN ===== */
         
-        /* Tablet (768px - 1024px) */
         @media (max-width: 1024px) and (min-width: 768px) {
             .product-container {
                 gap: 40px;
@@ -927,9 +898,7 @@
             }
         }
         
-        /* Mobile (below 768px) */
         @media (max-width: 767px) {
-            /* Header */
             header {
                 top: 32px;
                 padding: 15px 20px;
@@ -947,23 +916,25 @@
                 gap: 15px;
             }
             
-            /* Hero */
+            .urgency-banner {
+                font-size: 10px;
+                padding: 8px;
+                letter-spacing: 2px;
+            }
+            
             .founder-title {
                 font-size: 32px;
             }
             
-            /* Trust Badges */
             .trust-badges {
                 gap: 15px;
                 padding: 12px 15px;
-                border-radius: 30px;
             }
             
             .trust-badge {
                 font-size: 11px;
             }
             
-            /* Products - Stack vertically */
             .product-container,
             .product-section:nth-child(even) .product-container {
                 flex-direction: column !important;
@@ -985,7 +956,6 @@
                 filter: grayscale(0%);
             }
             
-            /* Sticky Bar */
             .sticky-buy-bar {
                 flex-direction: column;
                 gap: 15px;
@@ -1005,7 +975,6 @@
                 font-size: 16px;
             }
             
-            /* Modal */
             .modal-content {
                 padding: 30px 20px;
             }
@@ -1043,7 +1012,6 @@
             }
         }
         
-        /* Small Mobile (below 380px) */
         @media (max-width: 380px) {
             .logo {
                 font-size: 18px;
@@ -1063,8 +1031,8 @@
 </head>
 <body>
 
-    <!-- URGENCY BANNER - Top Fixed -->
-    <div class="urgency-banner">🔥 30% OFF — LIMITED STOCK</div>
+    <!-- URGENCY BANNER - Perfectly Themed -->
+    <div class="urgency-banner">⚜️ 30% OFF — LIMITED STOCK ⚜️</div>
 
     <!-- POPUP -->
     <div class="popup-overlay" id="founderPopup">
@@ -1115,7 +1083,7 @@
             <strong>Excellence requires absolute trust.</strong> Before experiencing a Farazé signature, I invite you to explore my journey, understand the art, and hear from those who wear it.
         </p>
         
-        <!-- TRUST BADGES - Single Location -->
+        <!-- TRUST BADGES -->
         <div class="trust-badges">
             <div class="trust-badge"><span>✓</span> Cash on Delivery</div>
             <div class="trust-badge"><span>✓</span> 8+ Hours Lasting</div>
