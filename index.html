@@ -47,6 +47,7 @@
             --gold: #d4af37; 
             --success: #22c55e;
             --error: #ef4444;
+            --urgent: #ff4444;
             --transition-slow: 0.8s cubic-bezier(0.16, 1, 0.3, 1); 
             --transition-med: 0.4s ease; 
         }
@@ -96,10 +97,33 @@
             font-family: 'Cinzel', serif; 
         }
         
-        /* Header - Responsive */
+        /* Urgency Banner */
+        .urgency-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: var(--urgent);
+            color: white;
+            text-align: center;
+            padding: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            z-index: 1001;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.9; }
+        }
+        
+        /* Header - Updated for banner */
         header { 
             position: fixed; 
-            top: 0; 
+            top: 36px; 
             width: 100%; 
             padding: 20px 5%; 
             display: flex; 
@@ -293,7 +317,7 @@
             justify-content: center; 
             align-items: center; 
             text-align: center; 
-            padding: 150px 20px 80px 20px; 
+            padding: 180px 20px 80px 20px; 
             border-bottom: 1px solid var(--border-lux); 
         }
         
@@ -325,6 +349,32 @@
         
         .trust-text strong { 
             color: var(--text-main); 
+        }
+        
+        /* Trust Badges */
+        .trust-badges {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            margin: 30px 0;
+            padding: 15px 25px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 50px;
+            border: 1px solid var(--border-lux);
+        }
+        
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+        
+        .trust-badge span {
+            color: var(--gold);
+            font-size: 14px;
         }
         
         .scroll-down { 
@@ -878,6 +928,7 @@
         @media (max-width: 767px) {
             /* Header */
             header {
+                top: 32px;
                 padding: 15px 20px;
                 flex-direction: column;
                 gap: 12px;
@@ -896,6 +947,17 @@
             /* Hero */
             .founder-title {
                 font-size: 32px;
+            }
+            
+            /* Trust Badges */
+            .trust-badges {
+                gap: 15px;
+                padding: 12px 15px;
+                border-radius: 30px;
+            }
+            
+            .trust-badge {
+                font-size: 11px;
             }
             
             /* Products - Stack vertically */
@@ -998,6 +1060,9 @@
 </head>
 <body>
 
+    <!-- URGENCY BANNER - Top Fixed -->
+    <div class="urgency-banner">🔥 30% OFF — LIMITED STOCK</div>
+
     <!-- POPUP -->
     <div class="popup-overlay" id="founderPopup">
         <div class="popup-card">
@@ -1046,12 +1111,21 @@
         <p class="trust-text">
             <strong>Excellence requires absolute trust.</strong> Before experiencing a Farazé signature, I invite you to explore my journey, understand the art, and hear from those who wear it.
         </p>
+        
+        <!-- TRUST BADGES - Single Location -->
+        <div class="trust-badges">
+            <div class="trust-badge"><span>✓</span> Cash on Delivery</div>
+            <div class="trust-badge"><span>✓</span> 8+ Hours Lasting</div>
+            <div class="trust-badge"><span>✓</span> 3 Day Return</div>
+            <div class="trust-badge"><span>✓</span> Premium Oil</div>
+        </div>
+        
         <div class="scroll-down">Scroll to Discover ↓</div>
     </section>
 
     <section class="product-section" data-name="Office by Faraz" data-original="2500" data-price="1750">
         <div class="product-container">
-            <div class="image-wrapper"><img src="office.png" alt="Office by Faraz"></div>
+            <div class="image-wrapper"><img src="images/office.png" alt="Office by Faraz"></div>
             <div class="info-wrapper">
                 <h2 class="title">Office by Faraz</h2>
                 <div class="price-container">
@@ -1067,7 +1141,7 @@
 
     <section class="product-section" data-name="Oud by Faraz" data-original="2500" data-price="1750">
         <div class="product-container">
-            <div class="image-wrapper"><img src="oud.png" alt="Oud by Faraz"></div>
+            <div class="image-wrapper"><img src="images/oud.png" alt="Oud by Faraz"></div>
             <div class="info-wrapper">
                 <h2 class="title">Oud by Faraz</h2>
                 <div class="price-container">
@@ -1083,7 +1157,7 @@
 
     <section class="product-section" data-name="Oxygen By Faraz" data-original="2000" data-price="1400">
         <div class="product-container">
-            <div class="image-wrapper"><img src="oxygen.png" alt="Oxygen by Faraz"></div>
+            <div class="image-wrapper"><img src="images/oxygen.png" alt="Oxygen by Faraz"></div>
             <div class="info-wrapper">
                 <h2 class="title">Oxygen by Faraz</h2>
                 <div class="price-container">
@@ -1099,7 +1173,7 @@
 
     <section class="product-section" data-name="Legendvibes by Faraz" data-original="2500" data-price="1750">
         <div class="product-container">
-            <div class="image-wrapper"><img src="legend.png" alt="Legendvibes by Faraz"></div>
+            <div class="image-wrapper"><img src="images/legend.png" alt="Legendvibes by Faraz"></div>
             <div class="info-wrapper">
                 <h2 class="title">Legendvibes by Faraz</h2>
                 <div class="price-container">
@@ -1115,7 +1189,7 @@
 
     <section class="product-section" data-name="Designed by Nimra" data-original="2000" data-price="1400">
         <div class="product-container">
-            <div class="image-wrapper"><img src="nimra.png" alt="Designed by Nimra"></div>
+            <div class="image-wrapper"><img src="images/nimra.png" alt="Designed by Nimra"></div>
             <div class="info-wrapper">
                 <h2 class="title">Designed by Nimra</h2>
                 <div class="price-container">
@@ -1131,7 +1205,7 @@
 
     <section class="product-section" data-name="Designed by Zarsh" data-original="2000" data-price="1400">
         <div class="product-container">
-            <div class="image-wrapper"><img src="zarsh.png" alt="Designed by Zarsh"></div>
+            <div class="image-wrapper"><img src="images/zarsh.png" alt="Designed by Zarsh"></div>
             <div class="info-wrapper">
                 <h2 class="title">Designed by Zarsh</h2>
                 <div class="price-container">
@@ -1477,7 +1551,4 @@
         }
     </script>
 </body>
-
 </html>
-
-
