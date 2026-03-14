@@ -1086,7 +1086,7 @@
 
     <section class="product-section" data-name="Office by Faraz" data-original="2500" data-price="1750">
         <div class="product-container">
-            <div class="image-wrapper"><img src="images/office.png" alt="Office by Faraz"></div>
+            <div class="image-wrapper"><img src="office.png" alt="Office by Faraz"></div>
             <div class="info-wrapper">
                 <h2 class="title">Office by Faraz</h2>
                 <div class="price-container">
@@ -1102,7 +1102,7 @@
 
     <section class="product-section" data-name="Oud by Faraz" data-original="2500" data-price="1750">
         <div class="product-container">
-            <div class="image-wrapper"><img src="images/oud.png" alt="Oud by Faraz"></div>
+            <div class="image-wrapper"><img src="oud.png" alt="Oud by Faraz"></div>
             <div class="info-wrapper">
                 <h2 class="title">Oud by Faraz</h2>
                 <div class="price-container">
@@ -1118,7 +1118,7 @@
 
     <section class="product-section" data-name="Oxygen By Faraz" data-original="2000" data-price="1400">
         <div class="product-container">
-            <div class="image-wrapper"><img src="images/oxygen.png" alt="Oxygen by Faraz"></div>
+            <div class="image-wrapper"><img src="oxygen.png" alt="Oxygen by Faraz"></div>
             <div class="info-wrapper">
                 <h2 class="title">Oxygen by Faraz</h2>
                 <div class="price-container">
@@ -1134,7 +1134,7 @@
 
     <section class="product-section" data-name="Legendvibes by Faraz" data-original="2500" data-price="1750">
         <div class="product-container">
-            <div class="image-wrapper"><img src="images/legend.png" alt="Legendvibes by Faraz"></div>
+            <div class="image-wrapper"><img src="legend.png" alt="Legendvibes by Faraz"></div>
             <div class="info-wrapper">
                 <h2 class="title">Legendvibes by Faraz</h2>
                 <div class="price-container">
@@ -1150,7 +1150,7 @@
 
     <section class="product-section" data-name="Designed by Nimra" data-original="2000" data-price="1400">
         <div class="product-container">
-            <div class="image-wrapper"><img src="images/nimra.png" alt="Designed by Nimra"></div>
+            <div class="image-wrapper"><img src="nimra.png" alt="Designed by Nimra"></div>
             <div class="info-wrapper">
                 <h2 class="title">Designed by Nimra</h2>
                 <div class="price-container">
@@ -1166,7 +1166,7 @@
 
     <section class="product-section" data-name="Designed by Zarsh" data-original="2000" data-price="1400">
         <div class="product-container">
-            <div class="image-wrapper"><img src="images/zarsh.png" alt="Designed by Zarsh"></div>
+            <div class="image-wrapper"><img src="zarsh.png" alt="Designed by Zarsh"></div>
             <div class="info-wrapper">
                 <h2 class="title">Designed by Zarsh</h2>
                 <div class="price-container">
@@ -1265,8 +1265,8 @@
         let discountAmount = 0;
         let showSelector = false;
         
-        // ✅ EmailJS Initialization
-        emailjs.init("Fyyq3ol0Pgz1SuVF4");  // Public Key
+        // EmailJS Initialization
+        emailjs.init("Fyyq3ol0Pgz1SuVF4");
         
         // Products data
         const products = [
@@ -1321,17 +1321,13 @@
         function openModal() { 
             if (!activeProduct) return; 
             
-            // Reset cart with current product
             cartItems = new Array(products.length).fill(0);
             const activeIndex = products.findIndex(p => p.name === activeProduct);
             if (activeIndex !== -1) {
                 cartItems[activeIndex] = 1;
             }
             
-            // Update modal title
             document.getElementById("modalProductDetails").innerHTML = activeProduct;
-            
-            // Reset form
             document.getElementById("custDelivery").value = ""; 
             document.getElementById("promoCode").value = "";
             document.getElementById("promoMessage").innerHTML = "";
@@ -1344,7 +1340,6 @@
             
             loadProductSelector();
             updateOrderTotal();
-            
             modal.classList.add("show-modal"); 
         }
         
@@ -1352,7 +1347,6 @@
             modal.classList.remove("show-modal"); 
         }
         
-        // Toggle product selector
         function toggleProductSelector() {
             showSelector = !showSelector;
             const selector = document.getElementById('productSelector');
@@ -1367,7 +1361,6 @@
             }
         }
         
-        // Load products into selector
         function loadProductSelector() {
             const container = document.getElementById('selectorItems');
             let html = '';
@@ -1391,14 +1384,12 @@
             container.innerHTML = html;
         }
         
-        // Update cart
         function updateCart(index, change) {
             cartItems[index] = Math.max(0, cartItems[index] + change);
             document.getElementById(`cartQty_${index}`).textContent = cartItems[index];
             updateOrderTotal();
         }
         
-        // Update order total
         function updateOrderTotal() {
             const delivery = document.getElementById("custDelivery").value; 
             const fee = delivery === "delivery" ? 250 : 0;
@@ -1430,7 +1421,6 @@
             document.getElementById("liveGrandTotal").innerText = "Rs. " + grandTotal;
         }
         
-        // Promo codes
         const PROMO_CODES = { "FAMILY30": 30 };
         
         function applyPromoCode() {
@@ -1452,7 +1442,6 @@
             }
         }
         
-        // Calculate order details for email
         function calculateOrderDetails() {
             const delivery = document.getElementById("custDelivery").value; 
             const fee = delivery === "delivery" ? 250 : 0;
@@ -1465,8 +1454,6 @@
                 if (qty > 0) {
                     subtotal += products[index].price * qty;
                     itemsList += `\n• ${products[index].name} x${qty} = Rs. ${products[index].price * qty}`;
-                    
-                    // For email template loop
                     ordersArray.push({
                         name: products[index].name,
                         units: qty,
@@ -1496,9 +1483,8 @@
             };
         }
         
-        // ✅ Send Confirmation Email to Customer (with new template)
+        // Send to Customer
         async function sendEmailBill(orderDetails, customerData) {
-            // Create orders array for template loop
             const orders = orderDetails.ordersArray.map(item => ({
                 name: item.name,
                 units: item.units,
@@ -1515,27 +1501,17 @@
                 grand_total: orderDetails.grandTotal
             };
             
-            console.log("📧 Sending to customer:", customerData.email);
-            console.log("📧 Params:", templateParams);
-            
             try {
-                const response = await emailjs.send(
-                    'service_l97ha6e',           // Service ID
-                    'template_mqbwnwk',          // ✅ NEW TEMPLATE ID
-                    templateParams
-                );
-                
-                console.log('✅ Email sent to customer:', response);
+                await emailjs.send('service_l97ha6e', 'template_mqbwnwk', templateParams);
                 return true;
             } catch (error) {
-                console.error('❌ Email sending failed:', error);
+                console.error('Email failed:', error);
                 return false;
             }
         }
         
-        // ✅ Send Notification to Faraz (with same template)
+        // Send to Faraz
         async function sendFarazNotification(orderDetails, customerData) {
-            // Create orders array for template loop
             const orders = orderDetails.ordersArray.map(item => ({
                 name: item.name,
                 units: item.units,
@@ -1543,41 +1519,31 @@
             }));
             
             const templateParams = {
-                to_email: "order@faraze.com",     // Aapka email
+                to_email: "order@faraze.com",
                 order_id: 'FZ-' + Date.now().toString().slice(-8),
                 orders: orders,
                 subtotal: orderDetails.subtotal,
                 shipping: orderDetails.shipping,
                 discount: orderDetails.discount,
                 grand_total: orderDetails.grandTotal,
-                // Extra details for Faraz
                 customer_name: customerData.name,
                 customer_phone: customerData.phone,
                 customer_address: `${customerData.address}, ${customerData.city}`
             };
             
-            console.log("📧 Sending to Faraz:", "order@faraze.com");
-            
             try {
-                const response = await emailjs.send(
-                    'service_l97ha6e',           // Service ID
-                    'template_mqbwnwk',          // ✅ NEW TEMPLATE ID
-                    templateParams
-                );
-                
-                console.log('✅ Notification sent to Faraz:', response);
+                await emailjs.send('service_l97ha6e', 'template_mqbwnwk', templateParams);
                 return true;
             } catch (error) {
-                console.error('❌ Notification failed:', error);
+                console.error('Notification failed:', error);
                 return false;
             }
         }
         
-        // Submit order
+        // Submit Order
         async function submitOrder(event) {
             event.preventDefault(); 
             
-            // Check if any items selected
             if (cartItems.every(qty => qty === 0)) {
                 alert('Please select at least one perfume');
                 return;
@@ -1595,44 +1561,35 @@
                 return;
             }
             
-            // Calculate order details
             const orderDetails = calculateOrderDetails();
             
-            // Track with Meta Pixel
+            // Meta Pixel
             fbq('track', 'InitiateCheckout');
             
-            // Build WhatsApp message
+            // WhatsApp
             let msg = `⚜️ *FARAZÉ ORDER* ⚜️%0A%0A`;
             msg += `🛒 *ITEMS:*${orderDetails.itemsList}%0A%0A`;
             msg += `📦 *DELIVERY:* ${orderDetails.delText}%0A`;
-            
             if (orderDetails.discount > 0) {
                 msg += `💰 *DISCOUNT:* -Rs. ${orderDetails.discount} (${orderDetails.discountPercent}% off)%0A`;
             }
-            
             msg += `💳 *GRAND TOTAL:* Rs. ${orderDetails.grandTotal}%0A%0A`;
             msg += `👤 *NAME:* ${name}%0A`;
             msg += `📧 *EMAIL:* ${email}%0A`;
             msg += `📞 *PHONE:* ${phone}%0A`;
             msg += `🏙️ *ADDRESS:* ${address}, ${city}`;
             
-            // Open WhatsApp
             window.open("https://wa.me/" + whatsappNumber + "?text=" + msg, "_blank"); 
             
             // Send emails
             const customerData = { name, email, phone, city, address };
-            
-            // Pehle customer ko email
             const emailSent = await sendEmailBill(orderDetails, customerData);
-            
-            // Phir Faraz ko notification
             const notificationSent = await sendFarazNotification(orderDetails, customerData);
             
             closeModal(); 
             
-            // Success message
             let successMsg = '✅ Order placed!';
-            if (emailSent) successMsg += ' Confirmation email sent to customer.';
+            if (emailSent) successMsg += ' Confirmation email sent.';
             if (notificationSent) successMsg += ' Notification sent to Faraz.';
             
             setTimeout(() => {
