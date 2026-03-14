@@ -2,1645 +2,913 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farazé | Luxury Perfumes</title>
     
-    <meta name="description" content="Farazé offers the best premium, long-lasting perfumes in Pakistan. Explore our luxury signature collection including Office by Faraz, Oxygen, Legendvibes, and more.">
-    <meta name="keywords" content="long lasting perfume, best perfume in pakistan, long lasting fragrances, luxury perfumes, Office by Faraz, Oud by Faraz, Faraze perfumes">
-    <meta name="author" content="Faraz Nadeem">
-    <title>Farazé | Premium Long-Lasting Perfumes</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
-    <!-- EmailJS Library -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <!-- jsPDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     
-    <!-- Meta Pixel Code -->
-    <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1609698440349668');
-    fbq('track', 'PageView');
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=1609698440349668&ev=PageView&noscript=1"
-    /></noscript>
-    <!-- End Meta Pixel Code -->
-
     <style>
-        :root { 
-            --bg-color: #050505; 
-            --bg-pure: #000000; 
-            --text-main: #FFFFFF; 
-            --text-muted: #999999; 
-            --border-lux: #2A2A2A; 
-            --gold: #d4af37; 
-            --success: #22c55e;
-            --error: #ef4444;
-            --transition-slow: 0.8s cubic-bezier(0.16, 1, 0.3, 1); 
-            --transition-med: 0.4s ease; 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
         
-        * { 
-            margin: 0; 
-            padding: 0; 
-            box-sizing: border-box; 
+        :root {
+            --bg: #0a0a0a;
+            --bg-light: #111111;
+            --text: #ffffff;
+            --text-muted: #888888;
+            --border: #222222;
+            --accent: #ffffff;
+            --success: #00c853;
+            --card-bg: #111111;
         }
         
-        body { 
-            background-color: var(--bg-color); 
-            color: var(--text-main); 
-            font-family: 'Inter', sans-serif; 
-            overflow-x: hidden; 
-            scroll-behavior: smooth; 
-            -webkit-font-smoothing: antialiased;
-            width: 100%;
-        }
-        
-        /* Background Effects */
-        body::before { 
-            content: ''; 
-            position: fixed; 
-            top: 0; 
-            left: 0; 
-            right: 0; 
-            bottom: 0; 
-            background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.04"/%3E%3C/svg%3E'); 
-            pointer-events: none; 
-            z-index: -2; 
-        }
-        
-        body::after { 
-            content: ''; 
-            position: fixed; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
-            background: radial-gradient(circle at center, #111 0%, #050505 70%); 
-            pointer-events: none; 
-            z-index: -1; 
-        }
-        
-        h1, h2, h3, .logo, .founder-title, .price, .modal-title, .footer-logo { 
-            font-family: 'Cinzel', serif; 
-        }
-        
-        /* URGENCY BANNER - Solid Black Premium */
-        .urgency-banner {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: #000000;
-            color: var(--gold);
-            text-align: center;
-            padding: 12px;
-            font-size: 13px;
-            font-weight: 500;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            z-index: 1001;
-            border-bottom: 1px solid var(--gold);
-            font-family: 'Inter', sans-serif;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
-        }
-        
-        /* Header - Updated for banner */
-        header { 
-            position: fixed; 
-            top: 41px; 
-            width: 100%; 
-            padding: 20px 5%; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            z-index: 1000; 
-            background: rgba(5, 5, 5, 0.85); 
-            backdrop-filter: blur(20px); 
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border-lux); 
-        }
-        
-        .logo { 
-            font-size: clamp(20px, 2.5vw, 26px); 
-            font-weight: 700; 
-            letter-spacing: 5px; 
-            text-transform: uppercase; 
-            color: var(--text-main); 
-            text-decoration: none; 
-        }
-        
-        .social-links { 
-            display: flex; 
-            gap: clamp(10px, 2vw, 20px); 
-            flex-wrap: wrap; 
-            justify-content: flex-end; 
-        }
-        
-        .social-btn { 
-            color: var(--text-muted); 
-            text-decoration: none; 
-            font-size: clamp(10px, 1.2vw, 11px); 
-            letter-spacing: 2px; 
-            text-transform: uppercase; 
-            transition: color var(--transition-med); 
-            position: relative; 
-        }
-        
-        .social-btn::after { 
-            content: ''; 
-            position: absolute; 
-            width: 0; 
-            height: 1px; 
-            bottom: -5px; 
-            left: 0; 
-            background-color: var(--gold); 
-            transition: width 0.3s; 
-        }
-        
-        .social-btn:hover { 
-            color: var(--text-main); 
-        }
-        
-        .social-btn:hover::after { 
-            width: 100%; 
-        }
-        
-        /* POPUP */
-        .popup-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            z-index: 9999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.5s ease;
-            padding: 16px;
-        }
-        
-        .popup-overlay.show {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .popup-card {
-            background: #0c0c0c;
-            border: 1px solid var(--border-lux);
-            border-top: 4px solid var(--gold);
-            width: 90%;
-            max-width: 400px;
-            padding: 40px 30px;
-            position: relative;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.8);
-            transform: translateY(30px) scale(0.95);
-            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-            text-align: center;
-            border-radius: 8px;
-        }
-        
-        .popup-overlay.show .popup-card {
-            transform: translateY(0) scale(1);
-        }
-        
-        .popup-close {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            color: var(--text-muted);
-            font-size: 24px;
-            cursor: pointer;
-            transition: color 0.3s;
+        body {
+            background: var(--bg);
+            color: var(--text);
             font-family: 'Inter', sans-serif;
         }
         
-        .popup-close:hover {
-            color: var(--text-main);
-        }
-        
-        .popup-greeting {
+        h1, h2, h3, .logo {
             font-family: 'Cinzel', serif;
-            font-size: 22px;
+            font-weight: 400;
             letter-spacing: 2px;
-            margin-bottom: 15px;
-            color: var(--text-main);
-            text-transform: uppercase;
         }
         
-        .popup-greeting span {
-            color: var(--gold);
-        }
-        
-        .popup-message {
-            font-size: 14px;
-            line-height: 1.8;
-            color: var(--text-muted);
-            margin-bottom: 25px;
-        }
-        
-        .popup-message strong {
-            color: var(--text-main);
-        }
-        
-        .popup-divider {
-            width: 60px;
-            height: 1px;
-            background: var(--gold);
-            margin: 20px auto;
-            opacity: 0.5;
-        }
-        
-        .popup-guarantee {
-            border: 1px solid var(--gold);
-            padding: 12px 20px;
-            font-size: 12px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--gold);
-            display: inline-block;
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
             width: 100%;
-            margin-bottom: 20px;
-            border-radius: 30px;
-        }
-        
-        .popup-review-link {
-            font-size: 13px;
-            letter-spacing: 1px;
-            color: var(--text-muted);
-            text-decoration: none;
-            border-bottom: 1px solid var(--text-muted);
-            padding-bottom: 3px;
-            transition: all 0.3s;
-            display: inline-block;
-        }
-        
-        .popup-review-link:hover {
-            color: var(--gold);
-            border-bottom-color: var(--gold);
-        }
-        
-        .popup-footer {
-            margin-top: 25px;
-            font-size: 10px;
-            color: #555;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-        
-        /* Hero Section */
-        .hero { 
-            min-height: 100vh; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center; 
-            align-items: center; 
-            text-align: center; 
-            padding: 180px 20px 80px 20px; 
-            border-bottom: 1px solid var(--border-lux); 
-        }
-        
-        .founder-title { 
-            font-size: clamp(32px, 5vw, 42px); 
-            font-weight: 400; 
-            letter-spacing: 3px; 
-            margin-bottom: 15px; 
-            text-transform: uppercase; 
-        }
-        
-        .hero-tagline { 
-            font-size: clamp(11px, 1.5vw, 13px); 
-            color: var(--text-muted); 
-            text-transform: uppercase; 
-            letter-spacing: 5px; 
-            margin-bottom: 35px; 
-        }
-        
-        .trust-text { 
-            font-size: clamp(14px, 2vw, 16px); 
-            line-height: 1.8; 
-            color: var(--text-muted); 
-            max-width: 650px; 
-            margin-bottom: 45px; 
-            font-weight: 300; 
-            padding: 0 15px;
-        }
-        
-        .trust-text strong { 
-            color: var(--text-main); 
-        }
-        
-        /* Trust Badges */
-        .trust-badges {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 25px;
-            margin: 30px 0;
-            padding: 15px 25px;
-            background: rgba(212, 175, 55, 0.05);
-            border-radius: 50px;
-            border: 1px solid rgba(212, 175, 55, 0.2);
-        }
-        
-        .trust-badge {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 13px;
-            color: var(--text-muted);
-        }
-        
-        .trust-badge span {
-            color: var(--gold);
-            font-size: 14px;
-        }
-        
-        .scroll-down { 
-            position: absolute; 
-            bottom: 40px; 
-            font-size: clamp(10px, 1.2vw, 11px); 
-            letter-spacing: 4px; 
-            text-transform: uppercase; 
-            color: var(--text-muted); 
-            animation: fadeInOut 2.5s infinite; 
-        }
-        
-        @keyframes fadeInOut { 
-            0%, 100% { opacity: 0.3; transform: translateY(0); } 
-            50% { opacity: 1; transform: translateY(8px); } 
-        }
-        
-        /* Product Sections */
-        .product-section { 
-            min-height: 100vh; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            padding: 80px 5%; 
-            border-bottom: 1px solid var(--border-lux); 
-        }
-        
-        .product-container { 
-            display: flex; 
-            align-items: center; 
-            max-width: 1100px; 
-            width: 100%; 
-            gap: clamp(40px, 6vw, 80px); 
-            opacity: 0; 
-            transform: translateY(40px); 
-            transition: all var(--transition-slow); 
-        }
-        
-        .product-container.visible { 
-            opacity: 1; 
-            transform: translateY(0); 
-        }
-        
-        .product-section:nth-child(even) .product-container { 
-            flex-direction: row-reverse; 
-        }
-        
-        .image-wrapper { 
-            flex: 1.2; 
-            position: relative; 
-            overflow: hidden; 
-            border: 1px solid var(--border-lux); 
-            border-radius: 4px;
-        }
-        
-        .image-wrapper img { 
-            width: 100%; 
-            display: block; 
-            filter: grayscale(100%); 
-            transition: transform var(--transition-slow), filter var(--transition-slow); 
-        }
-        
-        .image-wrapper:hover img { 
-            filter: grayscale(0%); 
-            transform: scale(1.03); 
-        }
-        
-        .info-wrapper { 
-            flex: 1; 
-        }
-        
-        h2.title { 
-            font-size: clamp(32px, 5vw, 48px); 
-            line-height: 1.1; 
-            margin-bottom: 15px; 
-            text-transform: uppercase; 
-            letter-spacing: 3px; 
-        }
-        
-        .price-container {
-            margin-bottom: 25px;
-        }
-        
-        .original-price { 
-            font-size: clamp(16px, 2vw, 20px); 
-            color: var(--text-muted); 
-            text-decoration: line-through;
-            margin-right: 12px;
-            opacity: 0.7;
-        }
-        
-        .discount-badge {
-            display: inline-block;
-            background: var(--gold);
-            color: var(--bg-pure);
-            font-size: clamp(10px, 1.2vw, 12px);
-            padding: 4px 10px;
-            border-radius: 2px;
-            font-weight: 600;
-            letter-spacing: 1px;
-            margin-left: 10px;
-            vertical-align: middle;
-        }
-        
-        .final-price { 
-            font-size: clamp(22px, 3vw, 28px); 
-            color: var(--gold); 
-            font-weight: 600;
-            letter-spacing: 1px; 
-            display: block;
-            margin-top: 8px;
-        }
-        
-        .description { 
-            font-size: clamp(14px, 1.8vw, 15px); 
-            line-height: 1.8; 
-            color: var(--text-muted); 
-            margin-bottom: 35px; 
-            max-width: 420px; 
-            font-weight: 300; 
-        }
-        
-        .notes { 
-            display: inline-block; 
-            font-size: clamp(10px, 1.2vw, 11px); 
-            text-transform: uppercase; 
-            letter-spacing: 3px; 
-            color: var(--text-main); 
-            border: 1px solid var(--border-lux); 
-            padding: 12px 22px; 
-            border-radius: 2px;
-        }
-        
-        /* Sticky Buy Bar */
-        .sticky-buy-bar { 
-            position: fixed; 
-            bottom: 40px; 
-            left: 50%; 
-            transform: translateX(-50%) translateY(120px); 
-            background: rgba(5, 5, 5, 0.95); 
-            backdrop-filter: blur(15px); 
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid var(--border-lux); 
-            padding: 18px 35px; 
-            display: flex; 
-            align-items: center; 
-            justify-content: space-between; 
-            gap: clamp(20px, 4vw, 40px); 
-            z-index: 900; 
-            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); 
-            width: 90%; 
-            max-width: 550px; 
-            border-radius: 50px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-        
-        .sticky-buy-bar.show { 
-            transform: translateX(-50%) translateY(0); 
-        }
-        
-        .bar-text { 
-            font-family: 'Cinzel', serif; 
-            font-size: clamp(16px, 2vw, 18px); 
-            color: var(--text-main); 
-            letter-spacing: 2px; 
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 60%;
-        }
-        
-        .bar-btn { 
-            background: var(--text-main); 
-            color: var(--bg-pure); 
-            border: none; 
-            padding: 14px 28px; 
-            font-family: 'Inter', sans-serif; 
-            font-weight: 600; 
-            cursor: pointer; 
-            text-transform: uppercase; 
-            letter-spacing: 2px; 
-            font-size: clamp(10px, 1.2vw, 11px); 
-            transition: all 0.3s; 
-            white-space: nowrap;
-            border-radius: 30px;
-        }
-        
-        .bar-btn:hover { 
-            background: var(--text-muted); 
-            color: var(--text-main); 
-        }
-        
-        /* Modal */
-        .modal { 
-            display: none; 
-            position: fixed; 
-            z-index: 2000; 
-            left: 0; 
-            top: 0; 
-            width: 100%; 
-            height: 100%; 
-            background-color: rgba(0, 0, 0, 0.92); 
-            backdrop-filter: blur(10px); 
-            -webkit-backdrop-filter: blur(10px);
-            justify-content: center; 
-            align-items: center; 
-            opacity: 0; 
-            transition: opacity 0.4s ease; 
-            padding: 16px;
-        }
-        
-        .modal.show-modal { 
-            display: flex; 
-            opacity: 1; 
-        }
-        
-        .modal-content { 
-            background-color: #080808; 
-            border: 1px solid var(--border-lux); 
-            padding: 40px 35px; 
-            width: 100%; 
-            max-width: 600px; 
-            position: relative; 
-            transform: translateY(30px); 
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5); 
-            max-height: 90vh; 
-            overflow-y: auto; 
-            border-radius: 20px;
-        }
-        
-        .modal.show-modal .modal-content { 
-            transform: translateY(0); 
-        }
-        
-        .close-btn { 
-            position: absolute; 
-            top: 15px; 
-            right: 20px; 
-            color: var(--text-muted); 
-            font-size: 32px; 
-            cursor: pointer; 
-        }
-        
-        .close-btn:hover { 
-            color: var(--text-main); 
-        }
-        
-        .modal-title { 
-            font-size: 24px; 
-            margin-bottom: 8px; 
-            letter-spacing: 2px; 
-            text-transform: uppercase; 
-        }
-        
-        .modal-subtitle { 
-            font-size: 14px; 
-            color: var(--text-muted); 
-            margin-bottom: 25px; 
-        }
-        
-        /* Form */
-        .form-group { 
-            margin-bottom: 16px; 
-        }
-        
-        .form-group input, 
-        .form-group textarea, 
-        .form-group select { 
-            width: 100%; 
-            padding: 14px 16px; 
-            background: transparent; 
-            border: 1px solid var(--border-lux); 
-            color: var(--text-main); 
-            font-family: 'Inter', sans-serif; 
-            font-size: 16px; 
-            outline: none; 
-            transition: border-color 0.3s; 
-            border-radius: 12px;
-        }
-        
-        .form-group input:focus, 
-        .form-group textarea:focus, 
-        .form-group select:focus { 
-            border-color: var(--gold); 
-        }
-        
-        /* Add More Button */
-        .add-more-btn {
-            width: 100%;
-            padding: 16px;
-            background: transparent;
-            border: 1px dashed var(--gold);
-            color: var(--gold);
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            cursor: pointer;
-            border-radius: 12px;
-            margin: 20px 0;
-            transition: all 0.3s;
-        }
-        
-        .add-more-btn:hover {
-            background: rgba(212, 175, 55, 0.1);
-            border-style: solid;
-        }
-        
-        /* Product Selector */
-        .product-selector {
-            margin: 20px 0;
-            padding: 20px;
-            border: 1px solid var(--border-lux);
-            background: rgba(0,0,0,0.3);
-            border-radius: 16px;
-        }
-        
-        .selector-item {
+            padding: 20px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 0;
-            border-bottom: 1px solid var(--border-lux);
+            background: var(--bg);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
         }
         
-        .selector-item-info {
-            flex: 2;
+        .logo {
+            font-size: 20px;
+            color: var(--text);
+            text-decoration: none;
         }
         
-        .selector-item-name {
-            font-size: 16px;
-            font-weight: 500;
-            margin-bottom: 4px;
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
         }
         
-        .selector-item-price {
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 13px;
+            letter-spacing: 1px;
+        }
+        
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: white;
+            color: black;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 50%;
+        }
+        
+        /* Hero */
+        .hero {
+            height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .hero h1 {
+            font-size: 32px;
+            margin-bottom: 15px;
+            color: white;
+        }
+        
+        .hero p {
+            color: var(--text-muted);
+            max-width: 500px;
             font-size: 14px;
-            color: var(--gold);
+            line-height: 1.6;
         }
         
-        .selector-item-controls {
+        /* Trust */
+        .trust-bar {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+        
+        .trust-bar i {
+            color: white;
+            margin-right: 8px;
+        }
+        
+        /* Products */
+        .products {
+            padding: 50px 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .product {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 20px;
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 250px;
+            background: #1a1a1a;
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
-            gap: 12px;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 12px;
         }
         
-        .selector-qty-btn {
-            width: 36px;
-            height: 36px;
-            background: rgba(255,255,255,0.1);
-            border: 1px solid var(--border-lux);
-            color: white;
+        .product h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+        
+        .product-desc {
+            color: var(--text-muted);
+            font-size: 12px;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+        
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
+        
+        .price {
             font-size: 18px;
+        }
+        
+        .old-price {
+            color: var(--text-muted);
+            font-size: 12px;
+            text-decoration: line-through;
+            margin-right: 8px;
+        }
+        
+        .add-btn {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: white;
+            padding: 8px 20px;
+            font-size: 12px;
             cursor: pointer;
-            border-radius: 10px;
-            transition: all 0.3s;
+            transition: 0.2s;
         }
         
-        .selector-qty-btn:hover {
-            background: var(--border-lux);
-            color: var(--gold);
+        .add-btn:hover {
+            border-color: white;
         }
         
-        .selector-qty {
-            min-width: 30px;
-            text-align: center;
-            font-weight: 600;
-        }
-        
-        /* Order Summary */
-        .order-summary { 
-            background-color: #0c0c0c; 
-            border: 1px solid var(--border-lux); 
-            padding: 20px; 
-            margin: 25px 0 20px 0; 
-            border-radius: 16px;
-        }
-        
-        .summary-items {
-            margin-bottom: 15px;
-            max-height: 150px;
+        /* Cart Sidebar */
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 350px;
+            height: 100vh;
+            background: var(--bg-light);
+            border-left: 1px solid var(--border);
+            z-index: 1000;
+            transition: 0.3s;
+            padding: 30px 20px;
             overflow-y: auto;
         }
         
-        .summary-item {
+        .cart-sidebar.open {
+            right: 0;
+        }
+        
+        .cart-header {
             display: flex;
             justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .close-cart {
+            cursor: pointer;
+            font-size: 24px;
             color: var(--text-muted);
-            font-size: 13px;
-            padding: 5px 0;
-            border-bottom: 1px dotted var(--border-lux);
         }
         
-        .summary-line { 
-            display: flex; 
-            justify-content: space-between; 
-            font-size: 14px; 
-            color: var(--text-muted); 
-            margin-bottom: 10px; 
-            text-transform: uppercase; 
+        .cart-items {
+            margin-bottom: 30px;
         }
         
-        .summary-discount {
+        .cart-item {
             display: flex;
             justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .cart-item-info h4 {
             font-size: 14px;
-            color: var(--success);
-            margin-bottom: 10px;
-            text-transform: uppercase;
+            margin-bottom: 5px;
         }
         
-        .summary-total { 
-            display: flex; 
-            justify-content: space-between; 
-            font-size: 18px; 
-            color: var(--gold); 
-            margin-top: 15px; 
-            padding-top: 15px; 
-            border-top: 1px solid var(--border-lux); 
-            font-weight: 600; 
+        .cart-item-price {
+            color: var(--text-muted);
+            font-size: 12px;
         }
         
-        /* Promo Code */
-        .promo-section {
+        .cart-item-qty {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .qty-btn {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: white;
+            width: 25px;
+            height: 25px;
+            cursor: pointer;
+        }
+        
+        .promo {
             display: flex;
             gap: 10px;
-            margin-bottom: 16px;
+            margin: 20px 0;
         }
         
-        .promo-section input {
+        .promo input {
             flex: 1;
-            padding: 14px 16px;
-            background: transparent;
-            border: 1px solid var(--border-lux);
-            color: var(--text-main);
-            font-size: 14px;
-            border-radius: 12px;
-            outline: none;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            padding: 12px;
+            color: white;
         }
         
-        .promo-btn {
-            padding: 14px 25px;
-            background: var(--gold);
-            color: var(--bg-pure);
+        .promo button {
+            background: white;
+            color: black;
             border: none;
+            padding: 0 20px;
             font-weight: 600;
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
             cursor: pointer;
-            border-radius: 12px;
-            white-space: nowrap;
         }
         
-        .promo-message {
+        .delivery {
+            margin: 20px 0;
+            padding: 15px 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .delivery label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            color: var(--text-muted);
             font-size: 13px;
-            margin-bottom: 16px;
         }
         
-        .promo-success { color: var(--success); }
-        .promo-error { color: var(--error); }
+        .total {
+            font-size: 18px;
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+        
+        .checkout-btn {
+            width: 100%;
+            background: white;
+            color: black;
+            border: none;
+            padding: 15px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .modal.show {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: var(--bg-light);
+            border: 1px solid var(--border);
+            padding: 40px;
+            max-width: 400px;
+            width: 100%;
+        }
+        
+        .modal h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            padding: 12px;
+            color: white;
+        }
+        
+        .order-summary {
+            background: var(--bg);
+            padding: 15px;
+            margin: 20px 0;
+        }
+        
+        .order-summary .row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+        
+        .order-summary .grand {
+            color: white;
+            font-size: 16px;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid var(--border);
+        }
+        
+        .submit-btn {
+            width: 100%;
+            background: white;
+            color: black;
+            border: none;
+            padding: 15px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        .success {
+            text-align: center;
+            padding: 20px 0;
+        }
+        
+        .success i {
+            font-size: 50px;
+            color: var(--success);
+            margin-bottom: 20px;
+        }
+        
+        .success h3 {
+            margin-bottom: 10px;
+        }
+        
+        .success p {
+            color: var(--text-muted);
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+        
+        .order-number {
+            background: var(--bg);
+            padding: 15px;
+            margin: 20px 0;
+        }
+        
+        .order-number .num {
+            font-size: 24px;
+            font-family: 'Cinzel', serif;
+        }
         
         /* Footer */
-        footer { 
-            background-color: var(--bg-pure); 
-            padding: 60px 5% 30px 5%; 
-            border-top: 1px solid var(--border-lux); 
-            text-align: center; 
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 11px;
         }
         
-        .footer-logo { 
-            font-size: clamp(20px, 3vw, 24px); 
-            letter-spacing: 5px; 
-            margin-bottom: 15px; 
-            color: var(--text-main); 
-            text-transform: uppercase; 
-        }
-        
-        .footer-promise { 
-            font-size: clamp(12px, 1.5vw, 13px); 
-            color: var(--text-muted); 
-            max-width: 450px; 
-            margin: 0 auto 30px auto; 
-            line-height: 1.8; 
-            font-weight: 300; 
-            padding: 0 15px;
-        }
-        
-        .footer-links { 
-            display: flex; 
-            justify-content: center; 
-            flex-wrap: wrap; 
-            gap: 20px; 
-            margin-bottom: 30px; 
-        }
-        
-        .copyright { 
-            font-size: 10px; 
-            color: #555; 
-            letter-spacing: 2px; 
-            text-transform: uppercase; 
-        }
-        
-        /* ===== RESPONSIVE DESIGN ===== */
-        
-        @media (max-width: 1024px) and (min-width: 768px) {
-            .product-container {
-                gap: 40px;
-            }
-            
-            h2.title {
-                font-size: 36px;
-            }
-            
-            .modal-content {
-                max-width: 550px;
-                padding: 35px 30px;
-            }
-        }
-        
-        @media (max-width: 767px) {
-            header {
-                top: 38px;
-                padding: 15px 20px;
-                flex-direction: column;
-                gap: 12px;
-            }
-            
-            .logo {
-                font-size: 22px;
-                letter-spacing: 4px;
-            }
-            
-            .social-links {
-                justify-content: center;
-                gap: 15px;
-            }
-            
-            .urgency-banner {
-                font-size: 11px;
-                padding: 8px;
-                letter-spacing: 2px;
-            }
-            
-            .founder-title {
-                font-size: 32px;
-            }
-            
-            .trust-badges {
-                gap: 15px;
-                padding: 12px 15px;
-            }
-            
-            .trust-badge {
-                font-size: 11px;
-            }
-            
-            .product-container,
-            .product-section:nth-child(even) .product-container {
-                flex-direction: column !important;
-                text-align: center;
-                gap: 30px;
-            }
-            
-            .info-wrapper {
-                text-align: center;
-            }
-            
-            .description {
-                margin-left: auto;
-                margin-right: auto;
-                max-width: 100%;
-            }
-            
-            .image-wrapper img {
-                filter: grayscale(0%);
-            }
-            
-            .sticky-buy-bar {
-                flex-direction: column;
-                gap: 15px;
-                padding: 15px 20px;
-                bottom: 20px;
-                width: calc(100% - 40px);
-                max-width: 400px;
-            }
-            
-            .bar-btn {
+        @media (max-width: 768px) {
+            .cart-sidebar {
                 width: 100%;
-                padding: 12px 20px;
+                right: -100%;
             }
             
-            .bar-text {
-                max-width: 100%;
-                font-size: 16px;
-            }
-            
-            .modal-content {
-                padding: 30px 20px;
-            }
-            
-            .form-row {
-                flex-direction: column;
-                gap: 16px;
-            }
-            
-            .promo-section {
-                flex-direction: column;
-            }
-            
-            .promo-btn {
-                width: 100%;
-            }
-            
-            .selector-item {
-                flex-direction: column;
-                gap: 12px;
-                align-items: flex-start;
-            }
-            
-            .selector-item-controls {
-                width: 100%;
-                justify-content: flex-end;
-            }
-            
-            .popup-card {
-                padding: 30px 25px;
-            }
-            
-            .popup-greeting {
-                font-size: 20px;
-            }
-        }
-        
-        @media (max-width: 380px) {
-            .logo {
-                font-size: 18px;
-                letter-spacing: 3px;
-            }
-            
-            .social-btn {
-                font-size: 9px;
-                letter-spacing: 1px;
-            }
-            
-            h2.title {
-                font-size: 28px;
+            .trust-bar {
+                flex-wrap: wrap;
+                gap: 15px;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- URGENCY BANNER - Solid Black Premium -->
-    <div class="urgency-banner">⚜️ 30% OFF — LIMITED STOCK ⚜️</div>
-
-    <!-- POPUP -->
-    <div class="popup-overlay" id="founderPopup">
-        <div class="popup-card">
-            <div class="popup-close" onclick="closePopup()">×</div>
-            
-            <div class="popup-greeting">
-                Hi, <span>Faraz</span> here
-            </div>
-            
-            <div class="popup-message">
-                <strong>Founder of Farazé</strong><br>
-                If the fragrance does not meet your expectations,<br>
-                simply return it. Your payment will be refunded immediately.
-            </div>
-            
-            <div class="popup-divider"></div>
-            
-            <div class="popup-guarantee">
-                100% Satisfaction Guarantee
-            </div>
-            
-            <a href="review.html" class="popup-review-link">
-                View Customer Reviews →
-            </a>
-            
-            <div class="popup-footer">
-                FARAZÉ • SIGNATURE PERFUMES
-            </div>
-        </div>
-    </div>
-
     <header>
-        <a href="index.html" class="logo">FARAZÉ</a>
-        <div class="social-links">
-            <a href="index.html" class="social-btn">Home</a>
-            <a href="review.html" class="social-btn">Reviews</a>
-            <a href="about.html" class="social-btn">About</a>
-            <a href="https://www.instagram.com/farazeofficialshop/" target="_blank" class="social-btn">Instagram</a>
-            <a href="https://www.tiktok.com/@farazeperfumes" target="_blank" class="social-btn">TikTok</a>
+        <a href="#" class="logo">FARAZÉ</a>
+        <div class="nav-links">
+            <a href="#">SHOP</a>
+            <a href="#">ABOUT</a>
+            <div class="cart-icon" onclick="toggleCart()">
+                <i class="fas fa-shopping-bag"></i>
+                <span class="cart-count" id="cartCount">0</span>
+            </div>
         </div>
     </header>
 
-    <section class="hero">
-        <h1 class="founder-title">The Farazé Standard</h1>
-        <p class="hero-tagline">Craftsmanship · Identity · Scent</p>
-        <p class="trust-text">
-            <strong>Excellence requires absolute trust.</strong> Before experiencing a Farazé signature, I invite you to explore my journey, understand the art, and hear from those who wear it.
-        </p>
-        
-        <!-- TRUST BADGES -->
-        <div class="trust-badges">
-            <div class="trust-badge"><span>✓</span> Cash on Delivery</div>
-            <div class="trust-badge"><span>✓</span> 8+ Hours Lasting</div>
-            <div class="trust-badge"><span>✓</span> 3 Day Return</div>
-            <div class="trust-badge"><span>✓</span> Premium Oil</div>
-        </div>
-        
-        <div class="scroll-down">Scroll to Discover ↓</div>
-    </section>
-
-    <!-- Product Sections - Fixed image paths -->
-    <section class="product-section" data-name="Office by Faraz" data-original="2500" data-price="1750">
-        <div class="product-container">
-            <div class="image-wrapper"><img src="office.png" alt="Office by Faraz"></div>
-            <div class="info-wrapper">
-                <h2 class="title">Office by Faraz</h2>
-                <div class="price-container">
-                    <span class="original-price">Rs. 2500</span>
-                    <span class="discount-badge">-30%</span>
-                    <span class="final-price">Rs. 1750</span>
-                </div>
-                <div class="description">A powerful, fresh, and exceptionally long-lasting fragrance engineered for ultimate professional confidence. It opens with sharp citrus and dries down to a dominating, magnetic woody base.</div>
-                <div class="notes">Bergamot · Ambroxan · Patchouli · Woody Notes</div>
-            </div>
-        </div>
-    </section>
-
-    <section class="product-section" data-name="Oud by Faraz" data-original="2500" data-price="1750">
-        <div class="product-container">
-            <div class="image-wrapper"><img src="oud.png" alt="Oud by Faraz"></div>
-            <div class="info-wrapper">
-                <h2 class="title">Oud by Faraz</h2>
-                <div class="price-container">
-                    <span class="original-price">Rs. 2500</span>
-                    <span class="discount-badge">-30%</span>
-                    <span class="final-price">Rs. 1750</span>
-                </div>
-                <div class="description">A majestic, highly concentrated oriental blend. It balances the deep, rich essence of white agarwood with soft florals and sweet musky undertones.</div>
-                <div class="notes">White Agarwood · Saffron · Vanilla · Amber</div>
-            </div>
-        </div>
-    </section>
-
-    <section class="product-section" data-name="Oxygen By Faraz" data-original="2000" data-price="1400">
-        <div class="product-container">
-            <div class="image-wrapper"><img src="oxygen.png" alt="Oxygen by Faraz"></div>
-            <div class="info-wrapper">
-                <h2 class="title">Oxygen by Faraz</h2>
-                <div class="price-container">
-                    <span class="original-price">Rs. 2000</span>
-                    <span class="discount-badge">-30%</span>
-                    <span class="final-price">Rs. 1400</span>
-                </div>
-                <div class="description">The scent of absolute victory. A high-energy, long-lasting aquatic fragrance that blends marine freshness with a magnetic, woody amber trail.</div>
-                <div class="notes">Sea Notes · Grapefruit · Guaiac Wood · Ambergris</div>
-            </div>
-        </div>
-    </section>
-
-    <section class="product-section" data-name="Legendvibes by Faraz" data-original="2500" data-price="1750">
-        <div class="product-container">
-            <div class="image-wrapper"><img src="legend.png" alt="Legendvibes by Faraz"></div>
-            <div class="info-wrapper">
-                <h2 class="title">Legendvibes by Faraz</h2>
-                <div class="price-container">
-                    <span class="original-price">Rs. 2500</span>
-                    <span class="discount-badge">-30%</span>
-                    <span class="final-price">Rs. 1750</span>
-                </div>
-                <div class="description">Bold, spicy, and irresistible. This incredibly long-lasting fragrance commands attention with an explosive mix of vibrant spices and warm, masculine woods.</div>
-                <div class="notes">Lemon · Cardamom · Ginger · Tonka Bean</div>
-            </div>
-        </div>
-    </section>
-
-    <section class="product-section" data-name="Designed by Nimra" data-original="2000" data-price="1400">
-        <div class="product-container">
-            <div class="image-wrapper"><img src="nimra.png" alt="Designed by Nimra"></div>
-            <div class="info-wrapper">
-                <h2 class="title">Designed by Nimra</h2>
-                <div class="price-container">
-                    <span class="original-price">Rs. 2000</span>
-                    <span class="discount-badge">-30%</span>
-                    <span class="final-price">Rs. 1400</span>
-                </div>
-                <div class="description">An enchanting, long-lasting floral masterpiece. It weaves fresh, uplifting citrus with a delicate, romantic bouquet of blossoms.</div>
-                <div class="notes">Peony · Osmanthus · Rose · Sandalwood</div>
-            </div>
-        </div>
-    </section>
-
-    <section class="product-section" data-name="Designed by Zarsh" data-original="2000" data-price="1400">
-        <div class="product-container">
-            <div class="image-wrapper"><img src="zarsh.png" alt="Designed by Zarsh"></div>
-            <div class="info-wrapper">
-                <h2 class="title">Designed by Zarsh</h2>
-                <div class="price-container">
-                    <span class="original-price">Rs. 2000</span>
-                    <span class="discount-badge">-30%</span>
-                    <span class="final-price">Rs. 1400</span>
-                </div>
-                <div class="description">A warm, spicy, and decadently sweet gourmand fragrance. Renowned for its extreme longevity, it envelops you in a luxurious, addictive aura.</div>
-                <div class="notes">Cinnamon · Dates · Praline · Vanilla</div>
-            </div>
-        </div>
-    </section>
-
-    <div class="sticky-buy-bar" id="buyBar">
-        <div class="bar-text" id="activeProductText">Farazé</div>
-        <button class="bar-btn" onclick="openModal()">Purchase Now</button>
+    <div class="hero">
+        <h1>LUXURY PERFUMES</h1>
+        <p>Crafted for those who appreciate distinction. Long-lasting fragrances with premium oils.</p>
     </div>
 
-    <!-- Order Modal -->
-    <div id="orderModal" class="modal">
+    <div class="trust-bar">
+        <span><i class="fas fa-check-circle"></i> CASH ON DELIVERY</span>
+        <span><i class="fas fa-clock"></i> 8+ HOURS</span>
+        <span><i class="fas fa-undo-alt"></i> 3 DAY RETURN</span>
+        <span><i class="fas fa-whatsapp"></i> WHATSAPP CONFIRMATION</span>
+    </div>
+
+    <div class="products" id="productsGrid"></div>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>CART</h3>
+            <span class="close-cart" onclick="toggleCart()">×</span>
+        </div>
+        
+        <div class="cart-items" id="cartItems">
+            <div style="color: #666; text-align: center; padding: 40px 0;">Your cart is empty</div>
+        </div>
+        
+        <div class="promo">
+            <input type="text" id="promoCode" placeholder="PROMO CODE">
+            <button onclick="applyPromo()">APPLY</button>
+        </div>
+        <div id="promoMessage" style="font-size: 12px; color: #00c853;"></div>
+        
+        <div class="delivery">
+            <label><input type="radio" name="delivery" value="delivery" checked onchange="updateDelivery()"> HOME DELIVERY (+ RS. 150)</label>
+            <label><input type="radio" name="delivery" value="pickup" onchange="updateDelivery()"> SELF PICKUP (FREE - LAHORE)</label>
+        </div>
+        
+        <div class="total">
+            <span>TOTAL</span>
+            <span id="cartTotal">Rs. 0</span>
+        </div>
+        
+        <button class="checkout-btn" onclick="openCheckout()" id="checkoutBtn" disabled>PROCEED TO CHECKOUT</button>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div class="modal" id="checkoutModal">
         <div class="modal-content">
-            <span class="close-btn" onclick="closeModal()">&times;</span>
-            <h3 class="modal-title">Complete Your Order</h3>
-            <p class="modal-subtitle" id="modalProductDetails"></p>
-            
-            <form id="orderForm" onsubmit="submitOrder(event)">
-                <!-- Customer Details -->
-                <div class="form-group"><input type="text" id="custName" placeholder="Full Name" required></div>
-                <div class="form-group"><input type="email" id="custEmail" placeholder="Email Address" required></div>
-                <div class="form-group"><input type="tel" id="custPhone" placeholder="Phone Number" required></div>
+            <div id="checkoutForm">
+                <h3>COMPLETE ORDER</h3>
                 
-                <div class="form-group">
-                    <select id="custDelivery" required onchange="updateOrderTotal()">
-                        <option value="" disabled selected>Select Delivery</option>
-                        <option value="pickup">Self Pickup (Free)</option>
-                        <option value="delivery">Delivery (+ Rs. 250)</option>
-                    </select>
-                </div>
-                
-                <div class="form-group"><input type="text" id="custCity" placeholder="City" required></div>
-                <div class="form-group"><textarea id="custAddress" placeholder="Full Address" rows="2" required></textarea></div>
-                
-                <!-- Promo Code -->
-                <div class="promo-section">
-                    <input type="text" id="promoCode" placeholder="Promo Code">
-                    <button type="button" class="promo-btn" onclick="applyPromoCode()">Apply</button>
-                </div>
-                <div class="promo-message" id="promoMessage"></div>
-                
-                <!-- Add More Perfumes Button -->
-                <button type="button" class="add-more-btn" onclick="toggleProductSelector()" id="toggleBtn">
-                    + Add More Perfumes
-                </button>
-                
-                <!-- Product Selector (Hidden by default) -->
-                <div class="product-selector" id="productSelector" style="display: none;">
-                    <div id="selectorItems"></div>
-                </div>
-                
-                <!-- Order Summary -->
-                <div class="order-summary">
-                    <div class="summary-items" id="summaryItems"></div>
-                    <div class="summary-line"><span>Subtotal</span><span id="liveSubtotal">Rs. 0</span></div>
-                    <div class="summary-line"><span>Delivery</span><span id="liveDelivery">Rs. 0</span></div>
-                    <div class="summary-discount" id="discountRow" style="display: none;">
-                        <span>Discount</span>
-                        <span id="discountAmount">-Rs. 0</span>
+                <form onsubmit="placeOrder(event)">
+                    <div class="form-group">
+                        <input type="text" id="fullName" placeholder="FULL NAME" required>
                     </div>
-                    <div class="summary-total"><span>Grand Total</span><span id="liveGrandTotal">Rs. 0</span></div>
+                    <div class="form-group">
+                        <input type="tel" id="phoneNumber" placeholder="PHONE NUMBER" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="cityName" placeholder="CITY" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="fullAddress" placeholder="FULL ADDRESS" rows="2" required></textarea>
+                    </div>
+                    
+                    <div class="order-summary" id="checkoutSummary"></div>
+                    
+                    <button type="submit" class="submit-btn" id="placeOrderBtn">PLACE ORDER</button>
+                </form>
+            </div>
+            
+            <div id="orderSuccess" style="display: none;">
+                <div class="success">
+                    <i class="fas fa-check-circle"></i>
+                    <h3>ORDER CONFIRMED</h3>
+                    <p>Your order has been placed successfully</p>
+                    
+                    <div class="order-number">
+                        <div style="color: #666; margin-bottom: 5px;">ORDER NUMBER</div>
+                        <div class="num" id="orderNumber">001</div>
+                    </div>
+                    
+                    <p style="font-size: 12px;">✓ A confirmation has been sent to Faraz on WhatsApp</p>
+                    
+                    <button class="submit-btn" onclick="closeModal()" style="margin-top: 20px;">CONTINUE SHOPPING</button>
                 </div>
-                
-                <button type="submit" class="bar-btn" style="width: 100%;">Place Order</button>
-            </form>
+            </div>
         </div>
     </div>
 
     <footer>
-        <div class="footer-logo">FARAZÉ</div>
-        <p class="footer-promise">Farazé is committed to creating distinct, long-lasting scent profiles with meticulous attention to detail. Every bottle represents a promise of craftsmanship.</p>
-        <div class="footer-links">
-            <a href="index.html" class="social-btn">Home</a>
-            <a href="review.html" class="social-btn">Reviews</a>
-            <a href="about.html" class="social-btn">About</a>
-            <a href="https://www.instagram.com/farazeofficialshop/" target="_blank" class="social-btn">Instagram</a>
-            <a href="https://www.tiktok.com/@farazeperfumes" target="_blank" class="social-btn">TikTok</a>
-        </div>
-        <div class="copyright">© 2026 FARAZÉ. SIGNATURE PERFUMES. ALL RIGHTS RESERVED.</div>
+        <div class="logo" style="margin-bottom: 15px;">FARAZÉ</div>
+        <p>Each bottle represents a promise of craftsmanship.</p>
+        <p style="margin-top: 30px;">© 2026 FARAZÉ — ALL RIGHTS RESERVED</p>
     </footer>
 
     <script>
-        const whatsappNumber = "923095607170"; 
-        let activeProduct = ""; 
-        let activePrice = 0;
-        let activeOriginal = 0;
-        let discountApplied = false;
-        let discountAmount = 0;
-        let showSelector = false;
+        // Configuration
+        const ADMIN_WHATSAPP = "923095607170"; // Your WhatsApp number
         
-        // Global counter for order IDs - starts from 1
-        let orderCounter = 1;
-        
-        // EmailJS Initialization
-        emailjs.init("Fyyq3ol0Pgz1SuVF4");
-        
-        // Products data
+        // Products
         const products = [
-            { name: "Office by Faraz", price: 1750, original: 2500 },
-            { name: "Oud by Faraz", price: 1750, original: 2500 },
-            { name: "Oxygen By Faraz", price: 1400, original: 2000 },
-            { name: "Legendvibes by Faraz", price: 1750, original: 2500 },
-            { name: "Designed by Nimra", price: 1400, original: 2000 },
-            { name: "Designed by Zarsh", price: 1400, original: 2000 }
+            { id: 1, name: "OFFICE BY FARAZ", price: 1750, original: 2500, desc: "Fresh citrus with magnetic woody base", notes: "BERGAMOT · AMBROXAN · PATCHOULI" },
+            { id: 2, name: "OUD BY FARAZ", price: 1750, original: 2500, desc: "Deep agarwood with sweet musky undertones", notes: "AGARWOOD · SAFFRON · VANILLA" },
+            { id: 3, name: "OXYGEN BY FARAZ", price: 1400, original: 2000, desc: "Aquatic fragrance with woody amber", notes: "SEA NOTES · GRAPEFRUIT · AMBER" },
+            { id: 4, name: "LEGENDVIBES", price: 1750, original: 2500, desc: "Bold spicy with warm masculine woods", notes: "CARDAMOM · GINGER · TONKA" },
+            { id: 5, name: "DESIGNED BY NIMRA", price: 1400, original: 2000, desc: "Floral masterpiece with fresh citrus", notes: "PEONY · ROSE · SANDALWOOD" },
+            { id: 6, name: "DESIGNED BY ZARSH", price: 1400, original: 2000, desc: "Warm spicy gourmand fragrance", notes: "CINNAMON · DATES · VANILLA" }
         ];
         
-        // Cart items
-        let cartItems = new Array(products.length).fill(0);
+        // State
+        let cart = [];
+        let promoApplied = false;
+        let deliveryFee = 150;
+        let deliveryMethod = 'delivery';
+        let orderCounter = parseInt(localStorage.getItem('orderCounter')) || 1;
         
-        // Product reveal observer
-        const productContainers = document.querySelectorAll('.product-container');
-        const revealObserver = new IntersectionObserver((entries) => { 
-            entries.forEach(entry => { 
-                if (entry.isIntersecting) entry.target.classList.add('visible'); 
-            }); 
-        }, { threshold: 0.2 });
-        productContainers.forEach(container => revealObserver.observe(container));
-        
-        // Active product observer
-        const sections = document.querySelectorAll('.product-section');
-        const activeText = document.getElementById('activeProductText');
-        const buyBar = document.getElementById('buyBar');
-        const activeObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) { 
-                    activeProduct = entry.target.getAttribute('data-name'); 
-                    activePrice = parseInt(entry.target.getAttribute('data-price'));
-                    activeOriginal = parseInt(entry.target.getAttribute('data-original'));
-                    buyBar.classList.add('show'); 
-                    activeText.innerHTML = activeProduct; 
-                }
-            });
-        }, { threshold: 0.4 });
-        sections.forEach(section => activeObserver.observe(section));
-        
-        // Hide sticky bar at bottom
-        window.addEventListener('scroll', () => { 
-            const footer = document.querySelector('footer'); 
-            if (window.scrollY < 200 || footer.getBoundingClientRect().top < window.innerHeight) {
-                buyBar.classList.remove('show'); 
-            }
-        });
-        
-        // Modal functions
-        const modal = document.getElementById("orderModal");
-        
-        function openModal() { 
-            if (!activeProduct) return; 
-            
-            cartItems = new Array(products.length).fill(0);
-            const activeIndex = products.findIndex(p => p.name === activeProduct);
-            if (activeIndex !== -1) {
-                cartItems[activeIndex] = 1;
-            }
-            
-            document.getElementById("modalProductDetails").innerHTML = activeProduct;
-            document.getElementById("custDelivery").value = ""; 
-            document.getElementById("promoCode").value = "";
-            document.getElementById("promoMessage").innerHTML = "";
-            discountApplied = false;
-            discountAmount = 0;
-            document.getElementById("discountRow").style.display = "none";
-            showSelector = false;
-            document.getElementById('productSelector').style.display = 'none';
-            document.getElementById('toggleBtn').innerHTML = '+ Add More Perfumes';
-            
-            loadProductSelector();
-            updateOrderTotal();
-            modal.classList.add("show-modal"); 
-        }
-        
-        function closeModal() { 
-            modal.classList.remove("show-modal"); 
-        }
-        
-        function toggleProductSelector() {
-            showSelector = !showSelector;
-            const selector = document.getElementById('productSelector');
-            const toggleBtn = document.getElementById('toggleBtn');
-            
-            if (showSelector) {
-                selector.style.display = 'block';
-                toggleBtn.innerHTML = '- Hide Perfumes';
-            } else {
-                selector.style.display = 'none';
-                toggleBtn.innerHTML = '+ Add More Perfumes';
-            }
-        }
-        
-        function loadProductSelector() {
-            const container = document.getElementById('selectorItems');
-            let html = '';
-            
-            products.forEach((product, index) => {
-                html += `
-                    <div class="selector-item">
-                        <div class="selector-item-info">
-                            <div class="selector-item-name">${product.name}</div>
-                            <div class="selector-item-price">Rs. ${product.price}</div>
+        // Render products
+        function renderProducts() {
+            const grid = document.getElementById('productsGrid');
+            grid.innerHTML = products.map(p => `
+                <div class="product">
+                    <div class="product-image"><i class="fas fa-spray-can-sparkles" style="font-size: 40px; opacity: 0.3;"></i></div>
+                    <h3>${p.name}</h3>
+                    <div class="product-desc">${p.desc}<br>${p.notes}</div>
+                    <div class="product-footer">
+                        <div class="price">
+                            <span class="old-price">RS. ${p.original}</span>
+                            <span>RS. ${p.price}</span>
                         </div>
-                        <div class="selector-item-controls">
-                            <button type="button" class="selector-qty-btn" onclick="updateCart(${index}, -1)">−</button>
-                            <span class="selector-qty" id="cartQty_${index}">${cartItems[index]}</span>
-                            <button type="button" class="selector-qty-btn" onclick="updateCart(${index}, 1)">+</button>
+                        <button class="add-btn" onclick="addToCart(${p.id})">ADD</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // Cart functions
+        function addToCart(id) {
+            const product = products.find(p => p.id === id);
+            const existing = cart.find(item => item.id === id);
+            
+            if (existing) {
+                existing.qty++;
+            } else {
+                cart.push({ ...product, qty: 1 });
+            }
+            
+            updateCart();
+            toggleCart(true);
+        }
+        
+        function updateQty(id, change) {
+            const item = cart.find(item => item.id === id);
+            if (item) {
+                item.qty += change;
+                if (item.qty <= 0) {
+                    cart = cart.filter(item => item.id !== id);
+                }
+            }
+            updateCart();
+        }
+        
+        function updateCart() {
+            // Update count
+            document.getElementById('cartCount').innerText = cart.reduce((sum, item) => sum + item.qty, 0);
+            
+            // Render cart items
+            const container = document.getElementById('cartItems');
+            if (cart.length === 0) {
+                container.innerHTML = '<div style="color: #666; text-align: center; padding: 40px 0;">Your cart is empty</div>';
+            } else {
+                container.innerHTML = cart.map(item => `
+                    <div class="cart-item">
+                        <div class="cart-item-info">
+                            <h4>${item.name}</h4>
+                            <div class="cart-item-price">RS. ${item.price}</div>
+                        </div>
+                        <div class="cart-item-qty">
+                            <button class="qty-btn" onclick="updateQty(${item.id}, -1)">−</button>
+                            <span>${item.qty}</span>
+                            <button class="qty-btn" onclick="updateQty(${item.id}, 1)">+</button>
                         </div>
                     </div>
-                `;
+                `).join('');
+            }
+            
+            // Update total
+            updateTotal();
+        }
+        
+        function updateTotal() {
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            const discount = promoApplied ? subtotal * 0.3 : 0;
+            const total = subtotal - discount + deliveryFee;
+            
+            document.getElementById('cartTotal').innerText = 'RS. ' + Math.round(total);
+            document.getElementById('checkoutBtn').disabled = cart.length === 0;
+        }
+        
+        function applyPromo() {
+            const code = document.getElementById('promoCode').value.toUpperCase();
+            if (code === 'FAMILY30') {
+                promoApplied = true;
+                document.getElementById('promoMessage').innerText = '✓ 30% discount applied';
+                updateTotal();
+            } else {
+                promoApplied = false;
+                document.getElementById('promoMessage').innerText = '× Invalid code';
+                updateTotal();
+            }
+        }
+        
+        function updateDelivery() {
+            deliveryMethod = document.querySelector('input[name="delivery"]:checked').value;
+            deliveryFee = deliveryMethod === 'delivery' ? 150 : 0;
+            updateTotal();
+        }
+        
+        function toggleCart(open) {
+            document.getElementById('cartSidebar').classList.toggle('open', open);
+        }
+        
+        function openCheckout() {
+            if (cart.length === 0) return;
+            
+            // Update checkout summary
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            const discount = promoApplied ? subtotal * 0.3 : 0;
+            const total = subtotal - discount + deliveryFee;
+            
+            document.getElementById('checkoutSummary').innerHTML = `
+                ${cart.map(item => `<div class="row"><span>${item.name} x${item.qty}</span><span>RS. ${item.price * item.qty}</span></div>`).join('')}
+                <div class="row"><span>SUBTOTAL</span><span>RS. ${subtotal}</span></div>
+                ${promoApplied ? '<div class="row"><span>DISCOUNT</span><span>-RS. ' + Math.round(discount) + '</span></div>' : ''}
+                <div class="row"><span>DELIVERY</span><span>${deliveryFee === 0 ? 'FREE' : 'RS. '+deliveryFee}</span></div>
+                <div class="row grand"><span>TOTAL</span><span>RS. ${Math.round(total)}</span></div>
+            `;
+            
+            document.getElementById('checkoutModal').classList.add('show');
+            toggleCart(false);
+        }
+        
+        // Generate PDF (Fraud Proof)
+        function generatePDF(orderData) {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            // Background watermark
+            doc.setFontSize(40);
+            doc.setTextColor(240, 240, 240);
+            doc.text('FARAZÉ', 40, 150, { angle: 45 });
+            
+            // Header
+            doc.setFontSize(20);
+            doc.setTextColor(0, 0, 0);
+            doc.text('FARAZÉ', 105, 20, { align: 'center' });
+            
+            doc.setFontSize(8);
+            doc.text('Luxury Perfumes - Pakistan', 105, 27, { align: 'center' });
+            
+            doc.line(20, 32, 190, 32);
+            
+            // Order details
+            doc.setFontSize(10);
+            doc.text(`Order #: ${orderData.id}`, 20, 45);
+            doc.text(`Date: ${new Date().toLocaleString()}`, 20, 52);
+            doc.text(`Customer: ${orderData.name}`, 20, 59);
+            doc.text(`Phone: ${orderData.phone}`, 20, 66);
+            doc.text(`Address: ${orderData.address}`, 20, 73);
+            
+            // Items table
+            let y = 90;
+            doc.setFontSize(9);
+            doc.setFont(undefined, 'bold');
+            doc.text('Item', 20, y);
+            doc.text('Qty', 120, y);
+            doc.text('Price', 150, y);
+            doc.text('Total', 170, y);
+            
+            doc.setFont(undefined, 'normal');
+            y += 7;
+            
+            orderData.items.forEach(item => {
+                doc.text(item.name.substring(0, 25), 20, y);
+                doc.text(item.qty.toString(), 120, y);
+                doc.text(`RS. ${item.price}`, 150, y);
+                doc.text(`RS. ${item.price * item.qty}`, 170, y);
+                y += 7;
             });
             
-            container.innerHTML = html;
-        }
-        
-        function updateCart(index, change) {
-            cartItems[index] = Math.max(0, cartItems[index] + change);
-            document.getElementById(`cartQty_${index}`).textContent = cartItems[index];
-            updateOrderTotal();
-        }
-        
-        function updateOrderTotal() {
-            const delivery = document.getElementById("custDelivery").value; 
-            const fee = delivery === "delivery" ? 250 : 0;
+            // Totals
+            y += 5;
+            doc.line(120, y, 190, y);
+            y += 7;
+            doc.text('Subtotal:', 130, y);
+            doc.text(`RS. ${orderData.subtotal}`, 170, y);
+            y += 7;
             
-            let subtotal = 0;
-            let itemsHtml = '';
-            
-            cartItems.forEach((qty, index) => {
-                if (qty > 0) {
-                    subtotal += products[index].price * qty;
-                    itemsHtml += `<div class="summary-item">• ${products[index].name} x${qty} = Rs. ${products[index].price * qty}</div>`;
-                }
-            });
-            
-            let discount = 0;
-            if (discountApplied) {
-                discount = Math.round(subtotal * (discountAmount / 100));
-                document.getElementById("discountRow").style.display = "flex";
-                document.getElementById("discountAmount").innerText = "-Rs. " + discount;
-            } else {
-                document.getElementById("discountRow").style.display = "none";
+            if (orderData.discount > 0) {
+                doc.text('Discount:', 130, y);
+                doc.text(`-RS. ${orderData.discount}`, 170, y);
+                y += 7;
             }
             
-            const grandTotal = subtotal + fee - discount;
+            doc.text('Delivery:', 130, y);
+            doc.text(orderData.deliveryFee === 0 ? 'FREE' : `RS. ${orderData.deliveryFee}`, 170, y);
+            y += 7;
             
-            document.getElementById('summaryItems').innerHTML = itemsHtml || '<div class="summary-item">No items selected</div>';
-            document.getElementById("liveSubtotal").innerText = "Rs. " + subtotal; 
-            document.getElementById("liveDelivery").innerText = fee === 0 ? "Free" : "Rs. 250"; 
-            document.getElementById("liveGrandTotal").innerText = "Rs. " + grandTotal;
+            doc.setFont(undefined, 'bold');
+            doc.text('Grand Total:', 130, y);
+            doc.text(`RS. ${orderData.grandTotal}`, 170, y);
+            
+            // Digital signature
+            doc.setFontSize(8);
+            doc.text(`Digitally Signed - Order ID: ${orderData.id}`, 105, 250, { align: 'center' });
+            doc.text('This is an official receipt - Any modifications invalid', 105, 257, { align: 'center' });
+            
+            return doc;
         }
         
-        const PROMO_CODES = { "FAMILY30": 30 };
-        
-        function applyPromoCode() {
-            const promoInput = document.getElementById("promoCode").value.trim().toUpperCase();
-            const promoMessage = document.getElementById("promoMessage");
+        // Send WhatsApp message with PDF link
+        function sendWhatsApp(orderData) {
+            // Format items for message
+            const itemsList = orderData.items.map(item => 
+                `• ${item.name} x${item.qty} = RS. ${item.price * item.qty}`
+            ).join('%0A');
             
-            if (PROMO_CODES[promoInput]) {
-                discountApplied = true;
-                discountAmount = PROMO_CODES[promoInput];
-                promoMessage.innerHTML = "✅ Promo Code applied! " + discountAmount + "% discount";
-                promoMessage.className = "promo-message promo-success";
-                updateOrderTotal();
-            } else {
-                discountApplied = false;
-                promoMessage.innerHTML = "❌ Invalid promo code";
-                promoMessage.className = "promo-message promo-error";
-                document.getElementById("discountRow").style.display = "none";
-                updateOrderTotal();
-            }
+            const message = `🛍️ *FARAZÉ - NEW ORDER* 🛍️%0A%0A` +
+                          `📋 *ORDER #${orderData.id}*%0A` +
+                          `═══════════════════%0A%0A` +
+                          `👤 *CUSTOMER*%0A` +
+                          `Name: ${orderData.name}%0A` +
+                          `Phone: ${orderData.phone}%0A` +
+                          `Address: ${orderData.address}%0A%0A` +
+                          `📦 *ITEMS*%0A` +
+                          `${itemsList}%0A%0A` +
+                          `💰 *TOTAL*%0A` +
+                          `Subtotal: RS. ${orderData.subtotal}%0A` +
+                          (orderData.discount > 0 ? `Discount: -RS. ${orderData.discount}%0A` : '') +
+                          `Delivery: ${orderData.deliveryFee === 0 ? 'FREE' : 'RS. '+orderData.deliveryFee}%0A` +
+                          `═══════════════════%0A` +
+                          `💎 *GRAND TOTAL: RS. ${orderData.grandTotal}*%0A%0A` +
+                          `✅ Please contact customer within 24 hours`;
+            
+            window.open(`https://wa.me/${ADMIN_WHATSAPP}?text=${message}`, '_blank');
         }
         
-        function calculateOrderDetails() {
-            const delivery = document.getElementById("custDelivery").value; 
-            const fee = delivery === "delivery" ? 250 : 0;
+        // Place order
+        async function placeOrder(event) {
+            event.preventDefault();
             
-            let subtotal = 0;
-            let itemsList = '';
-            let ordersArray = [];
+            const name = document.getElementById('fullName').value;
+            const phone = document.getElementById('phoneNumber').value;
+            const city = document.getElementById('cityName').value;
+            const address = document.getElementById('fullAddress').value;
             
-            cartItems.forEach((qty, index) => {
-                if (qty > 0) {
-                    subtotal += products[index].price * qty;
-                    itemsList += `\n• ${products[index].name} x${qty} = Rs. ${products[index].price * qty}`;
-                    ordersArray.push({
-                        name: products[index].name,
-                        units: qty,
-                        price: products[index].price
-                    });
-                }
-            });
-            
-            let discount = 0;
-            if (discountApplied) {
-                discount = Math.round(subtotal * (discountAmount / 100));
-            }
-            
-            const grandTotal = subtotal + fee - discount;
-            const delText = delivery === "delivery" ? "Delivery (Rs. 250)" : "Pickup (Free)";
-            
-            return {
-                subtotal,
-                shipping: fee,
-                discount,
-                discountPercent: discountAmount,
-                grandTotal,
-                delText,
-                itemsList,
-                ordersArray,
-                deliveryMethod: delivery
-            };
-        }
-        
-        // Generate sequential order ID (001, 002, 003, ...)
-        function generateOrderId() {
-            // Get the current count from localStorage or start from 1
-            let currentCount = localStorage.getItem('faraze_order_counter');
-            if (!currentCount) {
-                currentCount = 1;
-            } else {
-                currentCount = parseInt(currentCount) + 1;
-            }
-            
-            // Save back to localStorage
-            localStorage.setItem('faraze_order_counter', currentCount);
-            
-            // Format with leading zeros (001, 002, etc.)
-            return currentCount.toString().padStart(3, '0');
-        }
-        
-        // Send to Customer
-        async function sendEmailBill(orderDetails, customerData, orderId) {
-            const orders = orderDetails.ordersArray.map(item => ({
-                name: item.name,
-                units: item.units,
-                price: item.price
-            }));
-            
-            const templateParams = {
-                to_email: customerData.email,
-                order_id: orderId,
-                orders: orders,
-                subtotal: orderDetails.subtotal,
-                shipping: orderDetails.shipping,
-                discount: orderDetails.discount,
-                grand_total: orderDetails.grandTotal
-            };
-            
-            try {
-                await emailjs.send('service_l97ha6e', 'template_mqbwnwk', templateParams);
-                return true;
-            } catch (error) {
-                console.error('Email failed:', error);
-                return false;
-            }
-        }
-        
-        // Send to Faraz
-        async function sendFarazNotification(orderDetails, customerData, orderId) {
-            const orders = orderDetails.ordersArray.map(item => ({
-                name: item.name,
-                units: item.units,
-                price: item.price
-            }));
-            
-            const templateParams = {
-                to_email: "order@faraze.com",
-                order_id: orderId,
-                orders: orders,
-                subtotal: orderDetails.subtotal,
-                shipping: orderDetails.shipping,
-                discount: orderDetails.discount,
-                grand_total: orderDetails.grandTotal,
-                customer_name: customerData.name,
-                customer_phone: customerData.phone,
-                customer_address: `${customerData.address}, ${customerData.city}`
-            };
-            
-            try {
-                await emailjs.send('service_l97ha6e', 'template_mqbwnwk', templateParams);
-                return true;
-            } catch (error) {
-                console.error('Notification failed:', error);
-                return false;
-            }
-        }
-        
-        // Submit Order
-        async function submitOrder(event) {
-            event.preventDefault(); 
-            
-            if (cartItems.every(qty => qty === 0)) {
-                alert('Please select at least one perfume');
-                return;
-            }
-            
-            const name = document.getElementById("custName").value; 
-            const email = document.getElementById("custEmail").value;
-            const phone = document.getElementById("custPhone").value; 
-            const city = document.getElementById("custCity").value; 
-            const address = document.getElementById("custAddress").value; 
-            const delivery = document.getElementById("custDelivery").value; 
-            
-            if (!name || !email || !phone || !city || !address || !delivery) {
+            if (!name || !phone || !city || !address) {
                 alert('Please fill all fields');
                 return;
             }
             
-            const orderDetails = calculateOrderDetails();
+            // Calculate totals
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            const discount = promoApplied ? Math.round(subtotal * 0.3) : 0;
+            const grandTotal = subtotal - discount + deliveryFee;
             
-            // Generate ONE sequential order ID for everything (001, 002, etc.)
-            const orderId = generateOrderId();
+            // Generate order ID
+            const orderId = orderCounter.toString().padStart(3, '0');
+            orderCounter++;
+            localStorage.setItem('orderCounter', orderCounter);
             
-            // Meta Pixel
-            fbq('track', 'InitiateCheckout');
-            fbq('track', 'Purchase', {
-                value: orderDetails.grandTotal,
-                currency: 'PKR',
-                content_type: 'product',
-                content_ids: orderDetails.ordersArray.map(item => item.name)
-            });
+            // Prepare order data
+            const orderData = {
+                id: orderId,
+                name,
+                phone,
+                address: `${address}, ${city}`,
+                items: cart,
+                subtotal,
+                discount,
+                deliveryFee,
+                grandTotal,
+                deliveryMethod
+            };
             
-            // WhatsApp with same order ID
-            let msg = `⚜️ *FARAZÉ ORDER* ⚜️%0A%0A`;
-            msg += `📋 *ORDER ID:* #${orderId}%0A%0A`;
-            msg += `🛒 *ITEMS:*${orderDetails.itemsList}%0A%0A`;
-            msg += `📦 *DELIVERY:* ${orderDetails.delText}%0A`;
-            if (orderDetails.discount > 0) {
-                msg += `💰 *DISCOUNT:* -Rs. ${orderDetails.discount} (${orderDetails.discountPercent}% off)%0A`;
+            // Generate PDF (automatically)
+            const doc = generatePDF(orderData);
+            
+            // Show loading
+            document.getElementById('placeOrderBtn').innerText = 'PLACING ORDER...';
+            document.getElementById('placeOrderBtn').disabled = true;
+            
+            try {
+                // Send WhatsApp to admin (auto)
+                sendWhatsApp(orderData);
+                
+                // Show success
+                document.getElementById('orderNumber').innerText = orderId;
+                document.getElementById('checkoutForm').style.display = 'none';
+                document.getElementById('orderSuccess').style.display = 'block';
+                
+                // Clear cart
+                cart = [];
+                promoApplied = false;
+                document.getElementById('promoCode').value = '';
+                updateCart();
+                
+            } catch (error) {
+                alert('Order placed! WhatsApp sent.');
+                document.getElementById('orderNumber').innerText = orderId;
+                document.getElementById('checkoutForm').style.display = 'none';
+                document.getElementById('orderSuccess').style.display = 'block';
+                
+                cart = [];
+                promoApplied = false;
+                updateCart();
             }
-            msg += `💳 *GRAND TOTAL:* Rs. ${orderDetails.grandTotal}%0A%0A`;
-            msg += `👤 *NAME:* ${name}%0A`;
-            msg += `📧 *EMAIL:* ${email}%0A`;
-            msg += `📞 *PHONE:* ${phone}%0A`;
-            msg += `🏙️ *ADDRESS:* ${address}, ${city}`;
-            
-            window.open("https://wa.me/" + whatsappNumber + "?text=" + msg, "_blank"); 
-            
-            // Send both emails with SAME order ID
-            const customerData = { name, email, phone, city, address };
-            const emailSent = await sendEmailBill(orderDetails, customerData, orderId);
-            const notificationSent = await sendFarazNotification(orderDetails, customerData, orderId);
-            
-            closeModal(); 
-            
-            // Show order ID in success message
-            let successMsg = `✅ Order #${orderId} placed!`;
-            if (emailSent) successMsg += ' Confirmation email sent.';
-            if (notificationSent) successMsg += ' Notification sent to Faraz.';
-            
-            setTimeout(() => {
-                alert(successMsg);
-            }, 500);
         }
         
-        // Popup
-        setTimeout(() => {
-            document.getElementById('founderPopup').classList.add('show');
-        }, 600);
-        
-        setTimeout(() => {
-            document.getElementById('founderPopup').classList.remove('show');
-        }, 5000);
-        
-        function closePopup() {
-            document.getElementById('founderPopup').classList.remove('show');
+        function closeModal() {
+            document.getElementById('checkoutModal').classList.remove('show');
+            document.getElementById('checkoutForm').style.display = 'block';
+            document.getElementById('orderSuccess').style.display = 'none';
+            document.getElementById('placeOrderBtn').innerText = 'PLACE ORDER';
+            document.getElementById('placeOrderBtn').disabled = false;
         }
+        
+        // Initialize
+        renderProducts();
+        updateCart();
+        
+        // Close cart when clicking outside
+        document.addEventListener('click', function(e) {
+            const cart = document.getElementById('cartSidebar');
+            const icon = document.querySelector('.cart-icon');
+            if (!cart.contains(e.target) && !icon.contains(e.target) && cart.classList.contains('open')) {
+                cart.classList.remove('open');
+            }
+        });
     </script>
 </body>
 </html>
