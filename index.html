@@ -1084,6 +1084,7 @@
         <div class="scroll-down">Scroll to Discover ↓</div>
     </section>
 
+    <!-- Product Sections - Fixed image paths -->
     <section class="product-section" data-name="Office by Faraz" data-original="2500" data-price="1750">
         <div class="product-container">
             <div class="image-wrapper"><img src="office.png" alt="Office by Faraz"></div>
@@ -1264,6 +1265,9 @@
         let discountApplied = false;
         let discountAmount = 0;
         let showSelector = false;
+        
+        // Global counter for order IDs - starts from 1
+        let orderCounter = 1;
         
         // EmailJS Initialization
         emailjs.init("Fyyq3ol0Pgz1SuVF4");
@@ -1483,8 +1487,25 @@
             };
         }
         
+        // Generate sequential order ID (001, 002, 003, ...)
+        function generateOrderId() {
+            // Get the current count from localStorage or start from 1
+            let currentCount = localStorage.getItem('faraze_order_counter');
+            if (!currentCount) {
+                currentCount = 1;
+            } else {
+                currentCount = parseInt(currentCount) + 1;
+            }
+            
+            // Save back to localStorage
+            localStorage.setItem('faraze_order_counter', currentCount);
+            
+            // Format with leading zeros (001, 002, etc.)
+            return currentCount.toString().padStart(3, '0');
+        }
+        
         // Send to Customer
-        async function sendEmailBill(orderDetails, customerData) {
+        async function sendEmailBill(orderDetails, customerData, orderId) {
             const orders = orderDetails.ordersArray.map(item => ({
                 name: item.name,
                 units: item.units,
@@ -1493,7 +1514,7 @@
             
             const templateParams = {
                 to_email: customerData.email,
-                order_id: 'FZ-' + Date.now().toString().slice(-8),
+                order_id: orderId,
                 orders: orders,
                 subtotal: orderDetails.subtotal,
                 shipping: orderDetails.shipping,
@@ -1511,7 +1532,7 @@
         }
         
         // Send to Faraz
-        async function sendFarazNotification(orderDetails, customerData) {
+        async function sendFarazNotification(orderDetails, customerData, orderId) {
             const orders = orderDetails.ordersArray.map(item => ({
                 name: item.name,
                 units: item.units,
@@ -1520,7 +1541,7 @@
             
             const templateParams = {
                 to_email: "order@faraze.com",
-                order_id: 'FZ-' + Date.now().toString().slice(-8),
+                order_id: orderId,
                 orders: orders,
                 subtotal: orderDetails.subtotal,
                 shipping: orderDetails.shipping,
@@ -1563,11 +1584,21 @@
             
             const orderDetails = calculateOrderDetails();
             
+            // Generate ONE sequential order ID for everything (001, 002, etc.)
+            const orderId = generateOrderId();
+            
             // Meta Pixel
             fbq('track', 'InitiateCheckout');
+            fbq('track', 'Purchase', {
+                value: orderDetails.grandTotal,
+                currency: 'PKR',
+                content_type: 'product',
+                content_ids: orderDetails.ordersArray.map(item => item.name)
+            });
             
-            // WhatsApp
+            // WhatsApp with same order ID
             let msg = `⚜️ *FARAZÉ ORDER* ⚜️%0A%0A`;
+            msg += `📋 *ORDER ID:* #${orderId}%0A%0A`;
             msg += `🛒 *ITEMS:*${orderDetails.itemsList}%0A%0A`;
             msg += `📦 *DELIVERY:* ${orderDetails.delText}%0A`;
             if (orderDetails.discount > 0) {
@@ -1581,14 +1612,15 @@
             
             window.open("https://wa.me/" + whatsappNumber + "?text=" + msg, "_blank"); 
             
-            // Send emails
+            // Send both emails with SAME order ID
             const customerData = { name, email, phone, city, address };
-            const emailSent = await sendEmailBill(orderDetails, customerData);
-            const notificationSent = await sendFarazNotification(orderDetails, customerData);
+            const emailSent = await sendEmailBill(orderDetails, customerData, orderId);
+            const notificationSent = await sendFarazNotification(orderDetails, customerData, orderId);
             
             closeModal(); 
             
-            let successMsg = '✅ Order placed!';
+            // Show order ID in success message
+            let successMsg = `✅ Order #${orderId} placed!`;
             if (emailSent) successMsg += ' Confirmation email sent.';
             if (notificationSent) successMsg += ' Notification sent to Faraz.';
             
