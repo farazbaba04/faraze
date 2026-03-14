@@ -1265,8 +1265,8 @@
         let discountAmount = 0;
         let showSelector = false;
         
-        // EmailJS Initialization - Using your service
-        emailjs.init("YOUR_PUBLIC_KEY"); // EmailJS dashboard se public key copy karein
+        // ✅ EmailJS Initialization with your Public Key
+        emailjs.init("Fyyq3ol0Pgz1SuVF4");
         
         // Products data
         const products = [
@@ -1518,10 +1518,10 @@
             };
             
             try {
-                // Using your service ID: service_l97ha6e
+                // ✅ Your Service ID and Template ID
                 const response = await emailjs.send(
-                    'service_l97ha6e',  // ✅ YOUR SERVICE ID
-                    'YOUR_TEMPLATE_ID', // Template ID yahan lagayein
+                    'service_l97ha6e',      // Your Service ID
+                    'template_ls1q05e',     // Your Template ID
                     templateParams
                 );
                 console.log('Email sent successfully to customer:', response);
@@ -1560,10 +1560,10 @@
             };
             
             try {
-                // Using your service ID: service_l97ha6e
+                // ✅ Using same service ID but can use different template
                 const response = await emailjs.send(
-                    'service_l97ha6e',  // ✅ YOUR SERVICE ID
-                    'YOUR_NOTIFICATION_TEMPLATE_ID', // Alag template ho sakta hai
+                    'service_l97ha6e',      // Your Service ID
+                    'template_ls1q05e',     // Same template for now
                     templateParams
                 );
                 console.log('Notification sent to Faraz:', response);
