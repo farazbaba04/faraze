@@ -26,12 +26,11 @@
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
-    
-    fbq('init', 'YOUR_PIXEL_ID');
+    fbq('init', '1609698440349668');
     fbq('track', 'PageView');
     </script>
     <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"
+    src="https://www.facebook.com/tr?id=1609698440349668&ev=PageView&noscript=1"
     /></noscript>
     <!-- End Meta Pixel Code -->
 
@@ -1087,7 +1086,7 @@
 
     <section class="product-section" data-name="Office by Faraz" data-original="2500" data-price="1750">
         <div class="product-container">
-            <div class="image-wrapper"><img src="images/office.png" alt="Office by Faraz"></div>
+            <div class="image-wrapper"><img src="office.png" alt="Office by Faraz"></div>
             <div class="info-wrapper">
                 <h2 class="title">Office by Faraz</h2>
                 <div class="price-container">
@@ -1103,7 +1102,7 @@
 
     <section class="product-section" data-name="Oud by Faraz" data-original="2500" data-price="1750">
         <div class="product-container">
-            <div class="image-wrapper"><img src="images/oud.png" alt="Oud by Faraz"></div>
+            <div class="image-wrapper"><img src="oud.png" alt="Oud by Faraz"></div>
             <div class="info-wrapper">
                 <h2 class="title">Oud by Faraz</h2>
                 <div class="price-container">
@@ -1119,7 +1118,7 @@
 
     <section class="product-section" data-name="Oxygen By Faraz" data-original="2000" data-price="1400">
         <div class="product-container">
-            <div class="image-wrapper"><img src="images/oxygen.png" alt="Oxygen by Faraz"></div>
+            <div class="image-wrapper"><img src="oxygen.png" alt="Oxygen by Faraz"></div>
             <div class="info-wrapper">
                 <h2 class="title">Oxygen by Faraz</h2>
                 <div class="price-container">
@@ -1135,7 +1134,7 @@
 
     <section class="product-section" data-name="Legendvibes by Faraz" data-original="2500" data-price="1750">
         <div class="product-container">
-            <div class="image-wrapper"><img src="images/legend.png" alt="Legendvibes by Faraz"></div>
+            <div class="image-wrapper"><img src="legend.png" alt="Legendvibes by Faraz"></div>
             <div class="info-wrapper">
                 <h2 class="title">Legendvibes by Faraz</h2>
                 <div class="price-container">
@@ -1151,7 +1150,7 @@
 
     <section class="product-section" data-name="Designed by Nimra" data-original="2000" data-price="1400">
         <div class="product-container">
-            <div class="image-wrapper"><img src="images/nimra.png" alt="Designed by Nimra"></div>
+            <div class="image-wrapper"><img src="nimra.png" alt="Designed by Nimra"></div>
             <div class="info-wrapper">
                 <h2 class="title">Designed by Nimra</h2>
                 <div class="price-container">
@@ -1167,7 +1166,7 @@
 
     <section class="product-section" data-name="Designed by Zarsh" data-original="2000" data-price="1400">
         <div class="product-container">
-            <div class="image-wrapper"><img src="images/zarsh.png" alt="Designed by Zarsh"></div>
+            <div class="image-wrapper"><img src="zarsh.png" alt="Designed by Zarsh"></div>
             <div class="info-wrapper">
                 <h2 class="title">Designed by Zarsh</h2>
                 <div class="price-container">
@@ -1266,8 +1265,8 @@
         let discountAmount = 0;
         let showSelector = false;
         
-        // Initialize EmailJS (Replace with your actual public key)
-        emailjs.init("YOUR_PUBLIC_KEY"); // Get this from EmailJS website
+        // EmailJS Initialization - Using your service
+        emailjs.init("YOUR_PUBLIC_KEY"); // EmailJS dashboard se public key copy karein
         
         // Products data
         const products = [
@@ -1453,7 +1452,7 @@
             }
         }
         
-        // Calculate order details for WhatsApp and Email
+        // Calculate order details
         function calculateOrderDetails() {
             const delivery = document.getElementById("custDelivery").value; 
             const fee = delivery === "delivery" ? 250 : 0;
@@ -1496,12 +1495,13 @@
             };
         }
         
-        // Send Email Bill
+        // Send Email Bill to Customer
         async function sendEmailBill(orderDetails, customerData) {
-            // Template parameters for EmailJS
             const templateParams = {
                 to_email: customerData.email,
-                to_name: customerData.name,
+                from_name: "Farazé Perfumes",
+                from_email: "order@faraze.com",
+                reply_to: "order@faraze.com",
                 customer_name: customerData.name,
                 customer_phone: customerData.phone,
                 customer_address: `${customerData.address}, ${customerData.city}`,
@@ -1510,22 +1510,66 @@
                 delivery: orderDetails.delText,
                 discount: orderDetails.discount > 0 ? `-Rs. ${orderDetails.discount} (${orderDetails.discountPercent}% off)` : 'No discount',
                 grand_total: `Rs. ${orderDetails.grandTotal}`,
+                order_number: 'FZ-' + Date.now().toString().slice(-8),
                 order_date: new Date().toLocaleString('en-PK', { timeZone: 'Asia/Karachi' }),
-                order_number: 'FZ-' + Date.now().toString().slice(-8)
+                company_phone: "0309 5607170",
+                company_email: "order@faraze.com",
+                website: "faraze.com"
             };
             
             try {
-                // Replace with your EmailJS service ID and template ID
-                // Get these from EmailJS dashboard after creating an account
+                // Using your service ID: service_l97ha6e
                 const response = await emailjs.send(
-                    'YOUR_SERVICE_ID',      // Create service in EmailJS
-                    'YOUR_TEMPLATE_ID',     // Create template in EmailJS
+                    'service_l97ha6e',  // ✅ YOUR SERVICE ID
+                    'YOUR_TEMPLATE_ID', // Template ID yahan lagayein
                     templateParams
                 );
-                console.log('Email sent successfully:', response);
+                console.log('Email sent successfully to customer:', response);
+                
+                // Track purchase with Meta Pixel
+                fbq('track', 'Purchase', {
+                    value: orderDetails.grandTotal,
+                    currency: 'PKR',
+                    content_type: 'product',
+                    content_ids: orderDetails.itemsArray.map(item => item.name)
+                });
+                
                 return true;
             } catch (error) {
                 console.error('Email sending failed:', error);
+                return false;
+            }
+        }
+        
+        // Send Notification to Faraz
+        async function sendFarazNotification(orderDetails, customerData) {
+            const templateParams = {
+                to_email: "order@faraze.com",
+                to_name: "Faraz",
+                customer_name: customerData.name,
+                customer_phone: customerData.phone,
+                customer_email: customerData.email,
+                customer_address: `${customerData.address}, ${customerData.city}`,
+                order_items: orderDetails.itemsList,
+                subtotal: `Rs. ${orderDetails.subtotal}`,
+                delivery: orderDetails.delText,
+                discount: orderDetails.discount > 0 ? `-Rs. ${orderDetails.discount} (${orderDetails.discountPercent}% off)` : 'No discount',
+                grand_total: `Rs. ${orderDetails.grandTotal}`,
+                order_number: 'FZ-' + Date.now().toString().slice(-8),
+                order_date: new Date().toLocaleString('en-PK', { timeZone: 'Asia/Karachi' })
+            };
+            
+            try {
+                // Using your service ID: service_l97ha6e
+                const response = await emailjs.send(
+                    'service_l97ha6e',  // ✅ YOUR SERVICE ID
+                    'YOUR_NOTIFICATION_TEMPLATE_ID', // Alag template ho sakta hai
+                    templateParams
+                );
+                console.log('Notification sent to Faraz:', response);
+                return true;
+            } catch (error) {
+                console.error('Notification sending failed:', error);
                 return false;
             }
         }
@@ -1555,7 +1599,10 @@
             // Calculate order details
             const orderDetails = calculateOrderDetails();
             
-            // Build WhatsApp message with proper discount display
+            // Track with Meta Pixel
+            fbq('track', 'InitiateCheckout');
+            
+            // Build WhatsApp message
             let msg = `⚜️ *FARAZÉ ORDER* ⚜️%0A%0A`;
             msg += `🛒 *ITEMS:*${orderDetails.itemsList}%0A%0A`;
             msg += `📦 *DELIVERY:* ${orderDetails.delText}%0A`;
@@ -1573,15 +1620,16 @@
             // Open WhatsApp
             window.open("https://wa.me/" + whatsappNumber + "?text=" + msg, "_blank"); 
             
-            // Send email bill (optional - will work after EmailJS setup)
+            // Send emails
             const customerData = { name, email, phone, city, address };
             await sendEmailBill(orderDetails, customerData);
+            await sendFarazNotification(orderDetails, customerData);
             
             closeModal(); 
             
-            // Optional: Show success message
+            // Success message
             setTimeout(() => {
-                alert('✅ Order placed! Check your email for bill confirmation.');
+                alert('✅ Order placed! Bill sent to your email.');
             }, 500);
         }
         
