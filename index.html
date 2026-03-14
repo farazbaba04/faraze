@@ -1266,7 +1266,7 @@
         let showSelector = false;
         
         // ✅ EmailJS Initialization
-        emailjs.init("Fyyq3ol0Pgz1SuVF4");
+        emailjs.init("Fyyq3ol0Pgz1SuVF4");  // Public Key
         
         // Products data
         const products = [
@@ -1452,24 +1452,25 @@
             }
         }
         
-        // Calculate order details
+        // Calculate order details for email
         function calculateOrderDetails() {
             const delivery = document.getElementById("custDelivery").value; 
             const fee = delivery === "delivery" ? 250 : 0;
             
             let subtotal = 0;
             let itemsList = '';
-            let itemsArray = [];
+            let ordersArray = [];
             
             cartItems.forEach((qty, index) => {
                 if (qty > 0) {
                     subtotal += products[index].price * qty;
                     itemsList += `\n• ${products[index].name} x${qty} = Rs. ${products[index].price * qty}`;
-                    itemsArray.push({
+                    
+                    // For email template loop
+                    ordersArray.push({
                         name: products[index].name,
-                        quantity: qty,
-                        price: products[index].price,
-                        total: products[index].price * qty
+                        units: qty,
+                        price: products[index].price
                     });
                 }
             });
@@ -1484,25 +1485,34 @@
             
             return {
                 subtotal,
-                fee,
+                shipping: fee,
                 discount,
                 discountPercent: discountAmount,
                 grandTotal,
                 delText,
                 itemsList,
-                itemsArray,
+                ordersArray,
                 deliveryMethod: delivery
             };
         }
         
-        // ✅ FIXED: Send Confirmation Email to Customer
+        // ✅ Send Confirmation Email to Customer (with new template)
         async function sendEmailBill(orderDetails, customerData) {
-            // IMPORTANT: Template mein yeh variables hone chahiye
+            // Create orders array for template loop
+            const orders = orderDetails.ordersArray.map(item => ({
+                name: item.name,
+                units: item.units,
+                price: item.price
+            }));
+            
             const templateParams = {
-                to_email: customerData.email,  // YAHAN CUSTOMER KA EMAIL
-                name: customerData.name,
-                order_details: orderDetails.itemsList,
-                order_total: `Rs. ${orderDetails.grandTotal}`
+                to_email: customerData.email,
+                order_id: 'FZ-' + Date.now().toString().slice(-8),
+                orders: orders,
+                subtotal: orderDetails.subtotal,
+                shipping: orderDetails.shipping,
+                discount: orderDetails.discount,
+                grand_total: orderDetails.grandTotal
             };
             
             console.log("📧 Sending to customer:", customerData.email);
@@ -1510,8 +1520,8 @@
             
             try {
                 const response = await emailjs.send(
-                    'service_l97ha6e',      // Service ID
-                    'template_705jk4b',     // Template ID
+                    'service_l97ha6e',           // Service ID
+                    'template_mqbwnwk',          // ✅ NEW TEMPLATE ID
                     templateParams
                 );
                 
@@ -1523,16 +1533,26 @@
             }
         }
         
-        // ✅ FIXED: Send Notification to Faraz
+        // ✅ Send Notification to Faraz (with same template)
         async function sendFarazNotification(orderDetails, customerData) {
+            // Create orders array for template loop
+            const orders = orderDetails.ordersArray.map(item => ({
+                name: item.name,
+                units: item.units,
+                price: item.price
+            }));
+            
             const templateParams = {
-                to_email: "order@faraze.com",  // YAHAN AAPKA EMAIL
-                name: `New Order: ${customerData.name}`,
-                order_details: orderDetails.itemsList,
-                order_total: `Rs. ${orderDetails.grandTotal}`,
+                to_email: "order@faraze.com",     // Aapka email
+                order_id: 'FZ-' + Date.now().toString().slice(-8),
+                orders: orders,
+                subtotal: orderDetails.subtotal,
+                shipping: orderDetails.shipping,
+                discount: orderDetails.discount,
+                grand_total: orderDetails.grandTotal,
+                // Extra details for Faraz
                 customer_name: customerData.name,
                 customer_phone: customerData.phone,
-                customer_email: customerData.email,
                 customer_address: `${customerData.address}, ${customerData.city}`
             };
             
@@ -1540,39 +1560,17 @@
             
             try {
                 const response = await emailjs.send(
-                    'service_l97ha6e',      // Service ID
-                    'template_705jk4b',     // Template ID
+                    'service_l97ha6e',           // Service ID
+                    'template_mqbwnwk',          // ✅ NEW TEMPLATE ID
                     templateParams
                 );
                 
-                console.log('✅ Notification sent:', response);
+                console.log('✅ Notification sent to Faraz:', response);
                 return true;
             } catch (error) {
                 console.error('❌ Notification failed:', error);
                 return false;
             }
-        }
-        
-        // ✅ TEST FUNCTION - Pehle yeh test karein
-        function testEmail() {
-            const templateParams = {
-                to_email: "farazbabao04@gmail.com",  // Apna email daalein
-                name: "Test Customer",
-                order_details: "• Office by Faraz x1 = Rs. 1750\n• Oxygen By Faraz x1 = Rs. 1400",
-                order_total: "Rs. 3150"
-            };
-            
-            console.log("🧪 Testing email with params:", templateParams);
-            
-            emailjs.send('service_l97ha6e', 'template_705jk4b', templateParams)
-                .then(function(response) {
-                    console.log("✅ TEST SUCCESS!", response);
-                    alert("✅ Test email sent! Check your inbox.");
-                })
-                .catch(function(error) {
-                    console.log("❌ TEST ERROR!", error);
-                    alert("❌ Error: " + error.text);
-                });
         }
         
         // Submit order
@@ -1634,7 +1632,7 @@
             
             // Success message
             let successMsg = '✅ Order placed!';
-            if (emailSent) successMsg += ' Confirmation email sent.';
+            if (emailSent) successMsg += ' Confirmation email sent to customer.';
             if (notificationSent) successMsg += ' Notification sent to Faraz.';
             
             setTimeout(() => {
@@ -1654,14 +1652,6 @@
         function closePopup() {
             document.getElementById('founderPopup').classList.remove('show');
         }
-        
-        // Test function globally accessible
-        window.testEmail = testEmail;
     </script>
-    
-    <!-- Test Button -->
-    <button onclick="testEmail()" style="position:fixed; bottom:100px; right:20px; z-index:9999; background:gold; color:black; padding:15px 25px; border:none; border-radius:50px; font-weight:bold; cursor:pointer; box-shadow:0 5px 15px rgba(0,0,0,0.3);">
-        📧 TEST EMAIL
-    </button>
 </body>
 </html>
