@@ -1086,7 +1086,7 @@
 
     <section class="product-section" data-name="Office by Faraz" data-original="2500" data-price="1750">
         <div class="product-container">
-            <div class="image-wrapper"><img src="office.png" alt="Office by Faraz"></div>
+            <div class="image-wrapper"><img src="images/office.png" alt="Office by Faraz"></div>
             <div class="info-wrapper">
                 <h2 class="title">Office by Faraz</h2>
                 <div class="price-container">
@@ -1102,7 +1102,7 @@
 
     <section class="product-section" data-name="Oud by Faraz" data-original="2500" data-price="1750">
         <div class="product-container">
-            <div class="image-wrapper"><img src="oud.png" alt="Oud by Faraz"></div>
+            <div class="image-wrapper"><img src="images/oud.png" alt="Oud by Faraz"></div>
             <div class="info-wrapper">
                 <h2 class="title">Oud by Faraz</h2>
                 <div class="price-container">
@@ -1118,7 +1118,7 @@
 
     <section class="product-section" data-name="Oxygen By Faraz" data-original="2000" data-price="1400">
         <div class="product-container">
-            <div class="image-wrapper"><img src="oxygen.png" alt="Oxygen by Faraz"></div>
+            <div class="image-wrapper"><img src="images/oxygen.png" alt="Oxygen by Faraz"></div>
             <div class="info-wrapper">
                 <h2 class="title">Oxygen by Faraz</h2>
                 <div class="price-container">
@@ -1134,7 +1134,7 @@
 
     <section class="product-section" data-name="Legendvibes by Faraz" data-original="2500" data-price="1750">
         <div class="product-container">
-            <div class="image-wrapper"><img src="legend.png" alt="Legendvibes by Faraz"></div>
+            <div class="image-wrapper"><img src="images/legend.png" alt="Legendvibes by Faraz"></div>
             <div class="info-wrapper">
                 <h2 class="title">Legendvibes by Faraz</h2>
                 <div class="price-container">
@@ -1150,7 +1150,7 @@
 
     <section class="product-section" data-name="Designed by Nimra" data-original="2000" data-price="1400">
         <div class="product-container">
-            <div class="image-wrapper"><img src="nimra.png" alt="Designed by Nimra"></div>
+            <div class="image-wrapper"><img src="images/nimra.png" alt="Designed by Nimra"></div>
             <div class="info-wrapper">
                 <h2 class="title">Designed by Nimra</h2>
                 <div class="price-container">
@@ -1166,7 +1166,7 @@
 
     <section class="product-section" data-name="Designed by Zarsh" data-original="2000" data-price="1400">
         <div class="product-container">
-            <div class="image-wrapper"><img src="zarsh.png" alt="Designed by Zarsh"></div>
+            <div class="image-wrapper"><img src="images/zarsh.png" alt="Designed by Zarsh"></div>
             <div class="info-wrapper">
                 <h2 class="title">Designed by Zarsh</h2>
                 <div class="price-container">
@@ -1265,7 +1265,7 @@
         let discountAmount = 0;
         let showSelector = false;
         
-        // ✅ EmailJS Initialization with your Public Key
+        // ✅ EmailJS Initialization - Public Key
         emailjs.init("Fyyq3ol0Pgz1SuVF4");
         
         // Products data
@@ -1495,36 +1495,24 @@
             };
         }
         
-        // Send Email Bill to Customer
+        // ✅ Send Confirmation Email to Customer - Template ke mutabiq
         async function sendEmailBill(orderDetails, customerData) {
+            // Sirf {{name}} variable bhej rahe hain kyunke template mein yahi hai
             const templateParams = {
-                to_email: customerData.email,
-                from_name: "Farazé Perfumes",
-                from_email: "order@faraze.com",
-                reply_to: "order@faraze.com",
-                customer_name: customerData.name,
-                customer_phone: customerData.phone,
-                customer_address: `${customerData.address}, ${customerData.city}`,
-                order_items: orderDetails.itemsList,
-                subtotal: `Rs. ${orderDetails.subtotal}`,
-                delivery: orderDetails.delText,
-                discount: orderDetails.discount > 0 ? `-Rs. ${orderDetails.discount} (${orderDetails.discountPercent}% off)` : 'No discount',
-                grand_total: `Rs. ${orderDetails.grandTotal}`,
-                order_number: 'FZ-' + Date.now().toString().slice(-8),
-                order_date: new Date().toLocaleString('en-PK', { timeZone: 'Asia/Karachi' }),
-                company_phone: "0309 5607170",
-                company_email: "order@faraze.com",
-                website: "faraze.com"
+                name: customerData.name  // Template mein {{name}} hai
             };
             
             try {
-                // ✅ Your Service ID and Template ID
+                console.log("Sending email to:", customerData.email);
+                console.log("Template params (only name):", templateParams);
+                
                 const response = await emailjs.send(
                     'service_l97ha6e',      // Your Service ID
                     'template_705jk4b',     // Your Template ID
                     templateParams
                 );
-                console.log('Email sent successfully to customer:', response);
+                
+                console.log('✅ Email sent successfully:', response);
                 
                 // Track purchase with Meta Pixel
                 fbq('track', 'Purchase', {
@@ -1536,40 +1524,31 @@
                 
                 return true;
             } catch (error) {
-                console.error('Email sending failed:', error);
+                console.error('❌ Email sending failed:', error);
                 return false;
             }
         }
         
-        // Send Notification to Faraz
+        // ✅ Send Notification to Faraz - Sirf naam ke saath
         async function sendFarazNotification(orderDetails, customerData) {
+            // Sirf {{name}} variable bhej rahe hain
             const templateParams = {
-                to_email: "order@faraze.com",
-                to_name: "Faraz",
-                customer_name: customerData.name,
-                customer_phone: customerData.phone,
-                customer_email: customerData.email,
-                customer_address: `${customerData.address}, ${customerData.city}`,
-                order_items: orderDetails.itemsList,
-                subtotal: `Rs. ${orderDetails.subtotal}`,
-                delivery: orderDetails.delText,
-                discount: orderDetails.discount > 0 ? `-Rs. ${orderDetails.discount} (${orderDetails.discountPercent}% off)` : 'No discount',
-                grand_total: `Rs. ${orderDetails.grandTotal}`,
-                order_number: 'FZ-' + Date.now().toString().slice(-8),
-                order_date: new Date().toLocaleString('en-PK', { timeZone: 'Asia/Karachi' })
+                name: `Faraz - New Order from ${customerData.name}`  // Template mein {{name}} hai
             };
             
             try {
-                // ✅ Using same service ID but can use different template
+                console.log("Sending notification to Faraz...");
+                
                 const response = await emailjs.send(
                     'service_l97ha6e',      // Your Service ID
-                    'template_ls1q05e',     // Same template for now
+                    'template_705jk4b',     // Your Template ID
                     templateParams
                 );
-                console.log('Notification sent to Faraz:', response);
+                
+                console.log('✅ Notification sent:', response);
                 return true;
             } catch (error) {
-                console.error('Notification sending failed:', error);
+                console.error('❌ Notification failed:', error);
                 return false;
             }
         }
@@ -1622,14 +1601,17 @@
             
             // Send emails
             const customerData = { name, email, phone, city, address };
-            await sendEmailBill(orderDetails, customerData);
-            await sendFarazNotification(orderDetails, customerData);
+            const emailSent = await sendEmailBill(orderDetails, customerData);
+            const notificationSent = await sendFarazNotification(orderDetails, customerData);
             
             closeModal(); 
             
             // Success message
+            let successMsg = '✅ Order placed!';
+            if (emailSent) successMsg += ' Confirmation email sent.';
+            
             setTimeout(() => {
-                alert('✅ Order placed! Bill sent to your email.');
+                alert(successMsg);
             }, 500);
         }
         
