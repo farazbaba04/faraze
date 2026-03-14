@@ -1266,7 +1266,7 @@
         let showSelector = false;
         
         // ✅ EmailJS Initialization
-        emailjs.init("Fyyq3ol0Pgz1SuVF4");  // Public Key
+        emailjs.init("Fyyq3ol0Pgz1SuVF4");
         
         // Products data
         const products = [
@@ -1495,40 +1495,18 @@
             };
         }
         
-        // ✅ TEST FUNCTION - Pehle test karein
-        function testEmail() {
-            const templateParams = {
-                to_email: "farazbabao04@gmail.com",  // Apna email daalein test ke liye
-                name: "Test Customer",
-                order_details: "• Office by Faraz x1 = Rs. 1750",
-                order_total: "Rs. 2000"
-            };
-            
-            console.log("Testing email with params:", templateParams);
-            
-            emailjs.send('service_l97ha6e', 'template_705jk4b', templateParams)
-                .then(function(response) {
-                    console.log("✅ TEST SUCCESS!", response);
-                    alert("Test email sent! Check console and your email.");
-                })
-                .catch(function(error) {
-                    console.log("❌ TEST ERROR!", error);
-                    alert("Error: " + JSON.stringify(error));
-                });
-        }
-        
-        // ✅ Send Confirmation Email to Customer
+        // ✅ FIXED: Send Confirmation Email to Customer
         async function sendEmailBill(orderDetails, customerData) {
-            // IMPORTANT: to_email field必须存在
+            // IMPORTANT: Template mein yeh variables hone chahiye
             const templateParams = {
-                to_email: customerData.email,  // Customer ka email
+                to_email: customerData.email,  // YAHAN CUSTOMER KA EMAIL
                 name: customerData.name,
                 order_details: orderDetails.itemsList,
                 order_total: `Rs. ${orderDetails.grandTotal}`
             };
             
-            console.log("Sending to customer:", customerData.email);
-            console.log("Params:", templateParams);
+            console.log("📧 Sending to customer:", customerData.email);
+            console.log("📧 Params:", templateParams);
             
             try {
                 const response = await emailjs.send(
@@ -1545,10 +1523,10 @@
             }
         }
         
-        // ✅ Send Notification to Faraz
+        // ✅ FIXED: Send Notification to Faraz
         async function sendFarazNotification(orderDetails, customerData) {
             const templateParams = {
-                to_email: "order@faraze.com",  // Aapka email
+                to_email: "order@faraze.com",  // YAHAN AAPKA EMAIL
                 name: `New Order: ${customerData.name}`,
                 order_details: orderDetails.itemsList,
                 order_total: `Rs. ${orderDetails.grandTotal}`,
@@ -1558,7 +1536,7 @@
                 customer_address: `${customerData.address}, ${customerData.city}`
             };
             
-            console.log("Sending notification to Faraz:", "order@faraze.com");
+            console.log("📧 Sending to Faraz:", "order@faraze.com");
             
             try {
                 const response = await emailjs.send(
@@ -1573,6 +1551,28 @@
                 console.error('❌ Notification failed:', error);
                 return false;
             }
+        }
+        
+        // ✅ TEST FUNCTION - Pehle yeh test karein
+        function testEmail() {
+            const templateParams = {
+                to_email: "farazbabao04@gmail.com",  // Apna email daalein
+                name: "Test Customer",
+                order_details: "• Office by Faraz x1 = Rs. 1750\n• Oxygen By Faraz x1 = Rs. 1400",
+                order_total: "Rs. 3150"
+            };
+            
+            console.log("🧪 Testing email with params:", templateParams);
+            
+            emailjs.send('service_l97ha6e', 'template_705jk4b', templateParams)
+                .then(function(response) {
+                    console.log("✅ TEST SUCCESS!", response);
+                    alert("✅ Test email sent! Check your inbox.");
+                })
+                .catch(function(error) {
+                    console.log("❌ TEST ERROR!", error);
+                    alert("❌ Error: " + error.text);
+                });
         }
         
         // Submit order
@@ -1655,11 +1655,11 @@
             document.getElementById('founderPopup').classList.remove('show');
         }
         
-        // Test button - website par test karne ke liye
+        // Test function globally accessible
         window.testEmail = testEmail;
     </script>
     
-    <!-- Test Button - Bas test ke liye, baad mein hata dena -->
+    <!-- Test Button -->
     <button onclick="testEmail()" style="position:fixed; bottom:100px; right:20px; z-index:9999; background:gold; color:black; padding:15px 25px; border:none; border-radius:50px; font-weight:bold; cursor:pointer; box-shadow:0 5px 15px rgba(0,0,0,0.3);">
         📧 TEST EMAIL
     </button>
