@@ -1086,7 +1086,7 @@
 
     <section class="product-section" data-name="Office by Faraz" data-original="2500" data-price="1750">
         <div class="product-container">
-            <div class="image-wrapper"><img src="office.png" alt="Office by Faraz"></div>
+            <div class="image-wrapper"><img src="images/office.png" alt="Office by Faraz"></div>
             <div class="info-wrapper">
                 <h2 class="title">Office by Faraz</h2>
                 <div class="price-container">
@@ -1102,7 +1102,7 @@
 
     <section class="product-section" data-name="Oud by Faraz" data-original="2500" data-price="1750">
         <div class="product-container">
-            <div class="image-wrapper"><img src="oud.png" alt="Oud by Faraz"></div>
+            <div class="image-wrapper"><img src="images/oud.png" alt="Oud by Faraz"></div>
             <div class="info-wrapper">
                 <h2 class="title">Oud by Faraz</h2>
                 <div class="price-container">
@@ -1118,7 +1118,7 @@
 
     <section class="product-section" data-name="Oxygen By Faraz" data-original="2000" data-price="1400">
         <div class="product-container">
-            <div class="image-wrapper"><img src="oxygen.png" alt="Oxygen by Faraz"></div>
+            <div class="image-wrapper"><img src="images/oxygen.png" alt="Oxygen by Faraz"></div>
             <div class="info-wrapper">
                 <h2 class="title">Oxygen by Faraz</h2>
                 <div class="price-container">
@@ -1134,7 +1134,7 @@
 
     <section class="product-section" data-name="Legendvibes by Faraz" data-original="2500" data-price="1750">
         <div class="product-container">
-            <div class="image-wrapper"><img src="legend.png" alt="Legendvibes by Faraz"></div>
+            <div class="image-wrapper"><img src="images/legend.png" alt="Legendvibes by Faraz"></div>
             <div class="info-wrapper">
                 <h2 class="title">Legendvibes by Faraz</h2>
                 <div class="price-container">
@@ -1150,7 +1150,7 @@
 
     <section class="product-section" data-name="Designed by Nimra" data-original="2000" data-price="1400">
         <div class="product-container">
-            <div class="image-wrapper"><img src="nimra.png" alt="Designed by Nimra"></div>
+            <div class="image-wrapper"><img src="images/nimra.png" alt="Designed by Nimra"></div>
             <div class="info-wrapper">
                 <h2 class="title">Designed by Nimra</h2>
                 <div class="price-container">
@@ -1166,7 +1166,7 @@
 
     <section class="product-section" data-name="Designed by Zarsh" data-original="2000" data-price="1400">
         <div class="product-container">
-            <div class="image-wrapper"><img src="zarsh.png" alt="Designed by Zarsh"></div>
+            <div class="image-wrapper"><img src="images/zarsh.png" alt="Designed by Zarsh"></div>
             <div class="info-wrapper">
                 <h2 class="title">Designed by Zarsh</h2>
                 <div class="price-container">
@@ -1495,8 +1495,31 @@
             };
         }
         
+        // ✅ TEST FUNCTION - Pehle test karein
+        function testEmail() {
+            const templateParams = {
+                to_email: "farazbabao04@gmail.com",  // Apna email daalein test ke liye
+                name: "Test Customer",
+                order_details: "• Office by Faraz x1 = Rs. 1750",
+                order_total: "Rs. 2000"
+            };
+            
+            console.log("Testing email with params:", templateParams);
+            
+            emailjs.send('service_l97ha6e', 'template_705jk4b', templateParams)
+                .then(function(response) {
+                    console.log("✅ TEST SUCCESS!", response);
+                    alert("Test email sent! Check console and your email.");
+                })
+                .catch(function(error) {
+                    console.log("❌ TEST ERROR!", error);
+                    alert("Error: " + JSON.stringify(error));
+                });
+        }
+        
         // ✅ Send Confirmation Email to Customer
         async function sendEmailBill(orderDetails, customerData) {
+            // IMPORTANT: to_email field必须存在
             const templateParams = {
                 to_email: customerData.email,  // Customer ka email
                 name: customerData.name,
@@ -1504,9 +1527,10 @@
                 order_total: `Rs. ${orderDetails.grandTotal}`
             };
             
+            console.log("Sending to customer:", customerData.email);
+            console.log("Params:", templateParams);
+            
             try {
-                console.log("Sending email to customer:", customerData.email);
-                
                 const response = await emailjs.send(
                     'service_l97ha6e',      // Service ID
                     'template_705jk4b',     // Template ID
@@ -1514,15 +1538,6 @@
                 );
                 
                 console.log('✅ Email sent to customer:', response);
-                
-                // Track purchase with Meta Pixel
-                fbq('track', 'Purchase', {
-                    value: orderDetails.grandTotal,
-                    currency: 'PKR',
-                    content_type: 'product',
-                    content_ids: orderDetails.itemsArray.map(item => item.name)
-                });
-                
                 return true;
             } catch (error) {
                 console.error('❌ Email sending failed:', error);
@@ -1534,25 +1549,25 @@
         async function sendFarazNotification(orderDetails, customerData) {
             const templateParams = {
                 to_email: "order@faraze.com",  // Aapka email
-                name: `Faraz - New Order from ${customerData.name}`,
+                name: `New Order: ${customerData.name}`,
+                order_details: orderDetails.itemsList,
+                order_total: `Rs. ${orderDetails.grandTotal}`,
                 customer_name: customerData.name,
                 customer_phone: customerData.phone,
                 customer_email: customerData.email,
-                customer_address: `${customerData.address}, ${customerData.city}`,
-                order_details: orderDetails.itemsList,
-                order_total: `Rs. ${orderDetails.grandTotal}`
+                customer_address: `${customerData.address}, ${customerData.city}`
             };
             
+            console.log("Sending notification to Faraz:", "order@faraze.com");
+            
             try {
-                console.log("Sending notification to Faraz...");
-                
                 const response = await emailjs.send(
                     'service_l97ha6e',      // Service ID
                     'template_705jk4b',     // Template ID
                     templateParams
                 );
                 
-                console.log('✅ Notification sent to Faraz:', response);
+                console.log('✅ Notification sent:', response);
                 return true;
             } catch (error) {
                 console.error('❌ Notification failed:', error);
@@ -1608,7 +1623,11 @@
             
             // Send emails
             const customerData = { name, email, phone, city, address };
+            
+            // Pehle customer ko email
             const emailSent = await sendEmailBill(orderDetails, customerData);
+            
+            // Phir Faraz ko notification
             const notificationSent = await sendFarazNotification(orderDetails, customerData);
             
             closeModal(); 
@@ -1635,6 +1654,14 @@
         function closePopup() {
             document.getElementById('founderPopup').classList.remove('show');
         }
+        
+        // Test button - website par test karne ke liye
+        window.testEmail = testEmail;
     </script>
+    
+    <!-- Test Button - Bas test ke liye, baad mein hata dena -->
+    <button onclick="testEmail()" style="position:fixed; bottom:100px; right:20px; z-index:9999; background:gold; color:black; padding:15px 25px; border:none; border-radius:50px; font-weight:bold; cursor:pointer; box-shadow:0 5px 15px rgba(0,0,0,0.3);">
+        📧 TEST EMAIL
+    </button>
 </body>
 </html>
