@@ -13,11 +13,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     
+    <!-- EmailJS Library -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-    <script type="text/javascript">
-        (function() { emailjs.init("YOUR_PUBLIC_KEY"); })();
-    </script>
-
+    
     <!-- Meta Pixel Code -->
     <script>
     !function(f,b,e,v,n,t,s)
@@ -96,37 +94,30 @@
             font-family: 'Cinzel', serif; 
         }
         
-        /* URGENCY BANNER - Theme Perfect */
+        /* URGENCY BANNER - Solid Black Premium */
         .urgency-banner {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background: rgba(212, 175, 55, 0.08);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+            background: #000000;
             color: var(--gold);
             text-align: center;
-            padding: 10px;
-            font-size: 12px;
+            padding: 12px;
+            font-size: 13px;
             font-weight: 500;
             letter-spacing: 3px;
             text-transform: uppercase;
             z-index: 1001;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            border-bottom: 1px solid var(--gold);
             font-family: 'Inter', sans-serif;
-            animation: subtlePulse 3s infinite;
-        }
-        
-        @keyframes subtlePulse {
-            0%, 100% { opacity: 0.9; }
-            50% { opacity: 1; }
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
         
         /* Header - Updated for banner */
         header { 
             position: fixed; 
-            top: 36px; 
+            top: 41px; 
             width: 100%; 
             padding: 20px 5%; 
             display: flex; 
@@ -900,7 +891,7 @@
         
         @media (max-width: 767px) {
             header {
-                top: 32px;
+                top: 38px;
                 padding: 15px 20px;
                 flex-direction: column;
                 gap: 12px;
@@ -917,7 +908,7 @@
             }
             
             .urgency-banner {
-                font-size: 10px;
+                font-size: 11px;
                 padding: 8px;
                 letter-spacing: 2px;
             }
@@ -1031,7 +1022,7 @@
 </head>
 <body>
 
-    <!-- URGENCY BANNER - Perfectly Themed -->
+    <!-- URGENCY BANNER - Solid Black Premium -->
     <div class="urgency-banner">⚜️ 30% OFF — LIMITED STOCK ⚜️</div>
 
     <!-- POPUP -->
@@ -1096,7 +1087,7 @@
 
     <section class="product-section" data-name="Office by Faraz" data-original="2500" data-price="1750">
         <div class="product-container">
-            <div class="image-wrapper"><img src="office.png" alt="Office by Faraz"></div>
+            <div class="image-wrapper"><img src="images/office.png" alt="Office by Faraz"></div>
             <div class="info-wrapper">
                 <h2 class="title">Office by Faraz</h2>
                 <div class="price-container">
@@ -1112,7 +1103,7 @@
 
     <section class="product-section" data-name="Oud by Faraz" data-original="2500" data-price="1750">
         <div class="product-container">
-            <div class="image-wrapper"><img src="oud.png" alt="Oud by Faraz"></div>
+            <div class="image-wrapper"><img src="images/oud.png" alt="Oud by Faraz"></div>
             <div class="info-wrapper">
                 <h2 class="title">Oud by Faraz</h2>
                 <div class="price-container">
@@ -1128,7 +1119,7 @@
 
     <section class="product-section" data-name="Oxygen By Faraz" data-original="2000" data-price="1400">
         <div class="product-container">
-            <div class="image-wrapper"><img src="oxygen.png" alt="Oxygen by Faraz"></div>
+            <div class="image-wrapper"><img src="images/oxygen.png" alt="Oxygen by Faraz"></div>
             <div class="info-wrapper">
                 <h2 class="title">Oxygen by Faraz</h2>
                 <div class="price-container">
@@ -1144,7 +1135,7 @@
 
     <section class="product-section" data-name="Legendvibes by Faraz" data-original="2500" data-price="1750">
         <div class="product-container">
-            <div class="image-wrapper"><img src="legend.png" alt="Legendvibes by Faraz"></div>
+            <div class="image-wrapper"><img src="images/legend.png" alt="Legendvibes by Faraz"></div>
             <div class="info-wrapper">
                 <h2 class="title">Legendvibes by Faraz</h2>
                 <div class="price-container">
@@ -1160,7 +1151,7 @@
 
     <section class="product-section" data-name="Designed by Nimra" data-original="2000" data-price="1400">
         <div class="product-container">
-            <div class="image-wrapper"><img src="nimra.png" alt="Designed by Nimra"></div>
+            <div class="image-wrapper"><img src="images/nimra.png" alt="Designed by Nimra"></div>
             <div class="info-wrapper">
                 <h2 class="title">Designed by Nimra</h2>
                 <div class="price-container">
@@ -1176,7 +1167,7 @@
 
     <section class="product-section" data-name="Designed by Zarsh" data-original="2000" data-price="1400">
         <div class="product-container">
-            <div class="image-wrapper"><img src="zarsh.png" alt="Designed by Zarsh"></div>
+            <div class="image-wrapper"><img src="images/zarsh.png" alt="Designed by Zarsh"></div>
             <div class="info-wrapper">
                 <h2 class="title">Designed by Zarsh</h2>
                 <div class="price-container">
@@ -1260,7 +1251,7 @@
             <a href="index.html" class="social-btn">Home</a>
             <a href="review.html" class="social-btn">Reviews</a>
             <a href="about.html" class="social-btn">About</a>
-            <a href="https://www.instagram.com/farazeofficialshop" target="_blank" class="social-btn">Instagram</a>
+            <a href="https://www.instagram.com/farazeofficialshop/" target="_blank" class="social-btn">Instagram</a>
             <a href="https://www.tiktok.com/@farazeperfumes" target="_blank" class="social-btn">TikTok</a>
         </div>
         <div class="copyright">© 2026 FARAZÉ. SIGNATURE PERFUMES. ALL RIGHTS RESERVED.</div>
@@ -1274,6 +1265,9 @@
         let discountApplied = false;
         let discountAmount = 0;
         let showSelector = false;
+        
+        // Initialize EmailJS (Replace with your actual public key)
+        emailjs.init("YOUR_PUBLIC_KEY"); // Get this from EmailJS website
         
         // Products data
         const products = [
@@ -1459,8 +1453,85 @@
             }
         }
         
+        // Calculate order details for WhatsApp and Email
+        function calculateOrderDetails() {
+            const delivery = document.getElementById("custDelivery").value; 
+            const fee = delivery === "delivery" ? 250 : 0;
+            
+            let subtotal = 0;
+            let itemsList = '';
+            let itemsArray = [];
+            
+            cartItems.forEach((qty, index) => {
+                if (qty > 0) {
+                    subtotal += products[index].price * qty;
+                    itemsList += `\n• ${products[index].name} x${qty} = Rs. ${products[index].price * qty}`;
+                    itemsArray.push({
+                        name: products[index].name,
+                        quantity: qty,
+                        price: products[index].price,
+                        total: products[index].price * qty
+                    });
+                }
+            });
+            
+            let discount = 0;
+            if (discountApplied) {
+                discount = Math.round(subtotal * (discountAmount / 100));
+            }
+            
+            const grandTotal = subtotal + fee - discount;
+            const delText = delivery === "delivery" ? "Delivery (Rs. 250)" : "Pickup (Free)";
+            
+            return {
+                subtotal,
+                fee,
+                discount,
+                discountPercent: discountAmount,
+                grandTotal,
+                delText,
+                itemsList,
+                itemsArray,
+                deliveryMethod: delivery
+            };
+        }
+        
+        // Send Email Bill
+        async function sendEmailBill(orderDetails, customerData) {
+            // Template parameters for EmailJS
+            const templateParams = {
+                to_email: customerData.email,
+                to_name: customerData.name,
+                customer_name: customerData.name,
+                customer_phone: customerData.phone,
+                customer_address: `${customerData.address}, ${customerData.city}`,
+                order_items: orderDetails.itemsList,
+                subtotal: `Rs. ${orderDetails.subtotal}`,
+                delivery: orderDetails.delText,
+                discount: orderDetails.discount > 0 ? `-Rs. ${orderDetails.discount} (${orderDetails.discountPercent}% off)` : 'No discount',
+                grand_total: `Rs. ${orderDetails.grandTotal}`,
+                order_date: new Date().toLocaleString('en-PK', { timeZone: 'Asia/Karachi' }),
+                order_number: 'FZ-' + Date.now().toString().slice(-8)
+            };
+            
+            try {
+                // Replace with your EmailJS service ID and template ID
+                // Get these from EmailJS dashboard after creating an account
+                const response = await emailjs.send(
+                    'YOUR_SERVICE_ID',      // Create service in EmailJS
+                    'YOUR_TEMPLATE_ID',     // Create template in EmailJS
+                    templateParams
+                );
+                console.log('Email sent successfully:', response);
+                return true;
+            } catch (error) {
+                console.error('Email sending failed:', error);
+                return false;
+            }
+        }
+        
         // Submit order
-        function submitOrder(event) {
+        async function submitOrder(event) {
             event.preventDefault(); 
             
             // Check if any items selected
@@ -1470,42 +1541,48 @@
             }
             
             const name = document.getElementById("custName").value; 
+            const email = document.getElementById("custEmail").value;
             const phone = document.getElementById("custPhone").value; 
             const city = document.getElementById("custCity").value; 
             const address = document.getElementById("custAddress").value; 
             const delivery = document.getElementById("custDelivery").value; 
             
-            if (!name || !phone || !city || !address || !delivery) {
+            if (!name || !email || !phone || !city || !address || !delivery) {
                 alert('Please fill all fields');
                 return;
             }
             
-            // Build order
-            let subtotal = 0;
-            let itemsList = '';
+            // Calculate order details
+            const orderDetails = calculateOrderDetails();
             
-            cartItems.forEach((qty, index) => {
-                if (qty > 0) {
-                    subtotal += products[index].price * qty;
-                    itemsList += `%0A• ${products[index].name} x${qty}`;
-                }
-            });
-            
-            const fee = delivery === "delivery" ? 250 : 0;
-            const total = subtotal + fee;
-            const delText = delivery === "delivery" ? "Delivery" : "Pickup";
-            
-            // WhatsApp message
+            // Build WhatsApp message with proper discount display
             let msg = `⚜️ *FARAZÉ ORDER* ⚜️%0A%0A`;
-            msg += `🛒 *Items:*${itemsList}%0A%0A`;
-            msg += `📦 *Delivery:* ${delText}%0A`;
-            msg += `💰 *Total:* Rs. ${total}%0A%0A`;
-            msg += `👤 *Name:* ${name}%0A`;
-            msg += `📞 *Phone:* ${phone}%0A`;
-            msg += `🏙️ *Address:* ${address}, ${city}`;
+            msg += `🛒 *ITEMS:*${orderDetails.itemsList}%0A%0A`;
+            msg += `📦 *DELIVERY:* ${orderDetails.delText}%0A`;
             
+            if (orderDetails.discount > 0) {
+                msg += `💰 *DISCOUNT:* -Rs. ${orderDetails.discount} (${orderDetails.discountPercent}% off)%0A`;
+            }
+            
+            msg += `💳 *GRAND TOTAL:* Rs. ${orderDetails.grandTotal}%0A%0A`;
+            msg += `👤 *NAME:* ${name}%0A`;
+            msg += `📧 *EMAIL:* ${email}%0A`;
+            msg += `📞 *PHONE:* ${phone}%0A`;
+            msg += `🏙️ *ADDRESS:* ${address}, ${city}`;
+            
+            // Open WhatsApp
             window.open("https://wa.me/" + whatsappNumber + "?text=" + msg, "_blank"); 
+            
+            // Send email bill (optional - will work after EmailJS setup)
+            const customerData = { name, email, phone, city, address };
+            await sendEmailBill(orderDetails, customerData);
+            
             closeModal(); 
+            
+            // Optional: Show success message
+            setTimeout(() => {
+                alert('✅ Order placed! Check your email for bill confirmation.');
+            }, 500);
         }
         
         // Popup
